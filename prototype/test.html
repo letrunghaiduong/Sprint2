@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>EShopper - Bootstrap Shop Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+
+    <!-- Customized Bootstrap Stylesheet -->
+
+    <link rel="stylesheet" href="css_home.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+
+        .container {
+            margin: 30px auto
+        }
+
+        .navbar-nav .nav-link {
+            color: #000 !important;
+            padding: 0.5rem 0rem !important;
+            border-color: transparent;
+            margin-left: 1.5rem;
+            transition: none
+        }
+
+        .navbar .navbar-toggler:focus {
+            box-shadow: none
+        }
+
+        .navbar-nav .nav-link.active,
+        .border-red {
+            border-bottom: 3px solid #b71c1c
+        }
+
+        .container .product-item {
+            min-height: 450px;
+            border: none;
+            overflow: hidden;
+            position: relative;
+            border-radius: 0
+        }
+
+        .container .product-item .product {
+            width: 100%;
+            height: 350px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer
+        }
+
+        .container .product-item .product img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        .container .product-item .product .icons .icon {
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.6s ease;
+            transform: rotate(180deg);
+            cursor: pointer
+        }
+
+        .container .product-item .product .icons .icon:hover {
+            background-color: #b71c1c;
+            color: #fff
+        }
+
+        .container .product-item .product .icons .icon:nth-last-of-type(3) {
+            transition-delay: 0.2s
+        }
+
+        .container .product-item .product .icons .icon:nth-last-of-type(2) {
+            transition-delay: 0.15s
+        }
+
+        .container .product-item .product .icons .icon:nth-last-of-type(1) {
+            transition-delay: 0.1s
+        }
+
+        .container .product-item:hover .product .icons .icon {
+            transform: translateY(-60px)
+        }
+
+        .container .product-item .tag {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 500;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            padding: 0 0.4rem
+        }
+
+        .container .product-item .title {
+            font-size: 0.95rem;
+            letter-spacing: 0.5px
+        }
+
+        .container .product-item .fa-star {
+            font-size: 0.65rem;
+            color: goldenrod
+        }
+
+        .container .product-item .price {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-weight: 600
+        }
+
+        .fw-800 {
+            font-weight: 800
+        }
+
+        .bg-green {
+            background-color: #208f20 !important;
+            color: #fff
+        }
+
+        .bg-black {
+            background-color: #1f1d1d;
+            color: #fff
+        }
+
+        .bg-red {
+            background-color: #bb3535;
+            color: #fff
+        }
+
+
+        footer, header, nav, section {
+            display: block;
+        }
+        *, :after, :before {
+            box-sizing: border-box;
+        }
+        user agent stylesheet
+        footer {
+            display: block;
+        }
+
+        .carousel-item {
+            height: 65vh;
+            min-height: 350px;
+            background: no-repeat center center scroll;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+
+</head>
+
+<body>
+<!-- Topbar Start -->
+<div class="container-fluid"  style="background-color: #f1b0b7">
+
+    <div class="row align-items-center py-3 px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+            <a class="text-decoration-none" href="#">
+                <img src="https://elements-cover-images-0.imgix.net/1df78dfe-1c45-4d9e-8ebc-5709a60eb9a1?auto=compress&crop=edges&fit=crop&fm=jpeg&h=630&w=1200&s=c1d5063145edcc73926f0dfa9a2d4abf"
+                     alt="Avatar Logo" style="width:60%" class="rounded-pill">
+            </a>
+        </div>
+        <div class="col-lg-6 col-6 text-left">
+            <form action="">
+
+                <div class="justify-content-center d-flex">
+                    <input style="border-radius: 30px" class="form-control me-2" type="search"
+                           placeholder="Tìm kiếm"
+                           aria-label="Search">
+                    <button style="border-radius: 30px" class="btn btn-primary me-2">
+                        <i class="fa fa-search" style="border-radius: 30px"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-3 col-6 text-right">
+
+            <a href="" class="btn border">
+                <i class="fas fa-shopping-cart text-primary"></i>
+                <span class="badge">0</span>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- Topbar End -->
+
+
+<!-- Navbar Start -->
+
+<div class="container-fluid mb-5">
+    <div class="row border-top px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+            <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                <h6 class="m-0">Danh mục</h6>
+                <i class="fa fa-angle-down text-dark"></i>
+            </a>
+            <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
+                <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
+                    <a href="" class="nav-item nav-link">Sản phẩm bán chạy</a>
+                    <a href="" class="nav-item nav-link">Khuyến mãi</a>
+                    <a href="" class="nav-item nav-link">Tươi sống</a>
+                    <a href="" class="nav-item nav-link">Hải sản đông lạnh</a>
+                    <a href="" class="nav-item nav-link">Hải sản nhập khẩu</a>
+                    <a href="" class="nav-item nav-link">Cua</a>
+                    <a href="" class="nav-item nav-link">Tôm</a>
+                    <a href="" class="nav-item nav-link">Ghẹ</a>
+                    <a href="" class="nav-item nav-link">Cá</a>
+                </div>
+            </nav>
+        </div>
+        <div class="col-lg-9">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                <a href="" class="text-decoration-none d-block d-lg-none">
+                    <h1 class="m-0 display-5 font-weight-semi-bold">
+                        <span class="text-primary font-weight-bold border px-3 mr-1">Seafood</span>
+                    </h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="" class="nav-item nav-link">Đăng nhập</a>
+                        <a href="" class="nav-item nav-link">Đăng ký</a>
+
+                    </div>
+                </div>
+
+            </nav>
+            <div id="header-carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" style="height: 410px;">
+                        <img class="img-fluid" style="box-sizing: border-box" src="https://theme.hstatic.net/1000030244/1000943806/14/banner_bottom_1_1024x1024.jpg?v=4004" alt="Image">
+                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                            <div class="p-3" style="max-width: 700px;">
+                                <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
+                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Fashionable Dress</h3>
+                                <a href="#" class="btn btn-light py-2 px-3">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height: 410px;">
+                        <img class="img-fluid" src="" alt="Image">
+                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                            <div class="p-3" style="max-width: 700px;">
+                                <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
+                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Reasonable Price</h3>
+                                <a href="#" class="btn btn-light py-2 px-3">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                    <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                        <span class="carousel-control-prev-icon mb-n2"></span>
+                    </div>
+                </a>
+                <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                    <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                        <span class="carousel-control-next-icon mb-n2"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Navbar End -->
+
+
+<!-- Page Content -->
+
+<div class="container bg-white">
+    <nav class="navbar navbar-expand-md navbar-light bg-white">
+        <div class="container-fluid p-0">
+            <a class="navbar-brand text-uppercase fw-800" href="#">
+                Sản phẩm
+                <span class="border-red pe-2">bán chạy
+                </span>
+            </a>
+
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
+            <div class="product">
+                <img src="https://product.hstatic.net/1000030244/product/king_acb9ccc565264c229197e2680892898d_grande.jpg"
+                     alt="">
+                <ul class="d-flex align-items-center justify-content-center list-unstyled icons">
+                    <li class="icon">
+                        <i class="fas fa-shopping-cart text-primary"></i>
+                    </li>
+                    <!--                    <li class="icon mx-3"><span class="far fa-heart"></span></li>-->
+                    <!--                    <li class="icon"><span class="fas fa-shopping-bag"></span></li>-->
+                </ul>
+            </div>
+            <div class="tag bg-red">sale</div>
+            <div class="title pt-4 pb-1">Cua Hoàng Đế - King Crab Sống</div>
+            <div class="d-flex align-content-center justify-content-center">
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <!--                <span class="fas fa-star">Xuất Xứ : Canada - Mỹ</span>-->
+
+            </div>
+            <div class="price">$ 600.0</div>
+        </div>
+        <div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
+            <div class="product">
+                <img src="https://product.hstatic.net/1000030244/product/ghe_6093c9d1438442aebf5e2fe7423ea47a_grande.jpg"
+                     alt="">
+                <ul class="d-flex align-items-center justify-content-center list-unstyled icons">
+                    <li class="icon">
+                        <i class="fas fa-shopping-cart text-primary"></i>
+
+                    </li>
+                </ul>
+            </div>
+            <div class="tag bg-black">sale</div>
+            <div class="title pt-4 pb-1">Ghẹ Xanh Sống</div>
+            <div class="d-flex align-content-center justify-content-center">
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span></div>
+            <div class="price">$ 55.0</div>
+        </div>
+        <div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
+            <div class="product">
+                <img src="https://product.hstatic.net/1000030244/product/tom-cang-xanh_2de015440edc4ddea5460b3e7883041f_grande.jpg"
+                     alt="">
+                <ul class="d-flex align-items-center justify-content-center list-unstyled icons">
+                    <li class="icon">
+                        <i class="fas fa-shopping-cart text-primary"></i>
+
+                    </li>
+                </ul>
+            </div>
+            <div class="tag bg-green">new</div>
+            <div class="title pt-4 pb-1"> Tôm Càng Xanh Sống</div>
+            <div class="d-flex align-content-center justify-content-center">
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+
+                <span class="fas fa-star"></span>
+            </div>
+            <div class="price">$ 70.0</div>
+        </div>
+        <div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
+            <div class="product">
+                <img src="https://product.hstatic.net/1000030244/product/ca-chim-trang_047ec7ae8cf543839a7488264edba489_grande.png"
+                     alt="">
+                <ul class="d-flex align-items-center justify-content-center list-unstyled icons">
+                    <li class="icon">
+                        <i class="fas fa-shopping-cart text-primary"></i>
+
+                    </li>
+                </ul>
+            </div>
+            <div class="title pt-4 pb-1">Cá Chim Trắng Sống</div>
+            <div class="d-flex align-content-center justify-content-center">
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+            </div>
+            <div class="price">$ 60.0</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
+            <div class="product">
+                <img src="https://product.hstatic.net/1000030244/product/267756543_761227775279113_3779885466913377812_n__3__93bb8ead2f7644efbc3e54d2090e9c50_grande.png"
+                     alt="">
+                <ul class="d-flex align-items-center justify-content-center list-unstyled icons">
+                    <li class="icon">
+                        <i class="fas fa-shopping-cart text-primary"></i>
+
+                    </li>
+                </ul>
+            </div>
+            <div class="tag bg-red">sale</div>
+            <div class="title pt-4 pb-1">Tôm Mũ Ni Đông Lạnh 5-7 Con</div>
+            <div class="d-flex align-content-center justify-content-center">
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+            </div>
+            <div class="price">$ 60.0</div>
+        </div>
+        <div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
+            <div class="product">
+                <img src="https://product.hstatic.net/1000030244/product/118580945_646182196022290_6552669450736221927_n_01ae03f6de91401e854ee0c537b7987d_grande.jpg"
+                     alt="">
+                <ul class="d-flex align-items-center justify-content-center list-unstyled icons">
+                    <li class="icon">
+                        <i class="fas fa-shopping-cart text-primary"></i>
+
+                    </li>
+                </ul>
+            </div>
+            <div class="tag bg-black">out of stock</div>
+            <div class="title pt-4 pb-1">Cá Tuyết Alaska Nguyên Con</div>
+            <div class="d-flex align-content-center justify-content-center">
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span></div>
+            <div class="price">$ 55.0</div>
+        </div>
+        <div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
+            <div class="product">
+                <img src="https://product.hstatic.net/1000030244/product/59d8e87f-f840-4c25-bb4a-097780781c76_49bbbbec1bed47d9b9de86b1f75057ac_grande.jpg"
+                     alt="">
+                <ul class="d-flex align-items-center justify-content-center list-unstyled icons">
+                    <li class="icon">
+                        <i class="fas fa-shopping-cart text-primary"></i>
+
+                    </li>
+                </ul>
+            </div>
+            <div class="title pt-4 pb-1"> Trứng Cá Tầm Imperial Caviar</div>
+            <div class="d-flex align-content-center justify-content-center">
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span></div>
+            <div class="price">$ 70.0</div>
+        </div>
+        <div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
+            <div class="product">
+                <img src="https://product.hstatic.net/1000030244/product/untitled-1_6cda2461e8d24015b03691bef9cf924f_grande.jpg"
+                     alt="">
+                <ul class="d-flex align-items-center justify-content-center list-unstyled icons">
+                    <li class="icon">
+                        <i class="fas fa-shopping-cart text-primary"></i>
+
+                    </li>
+                </ul>
+            </div>
+            <div class="tag bg-green">new</div>
+            <div class="title pt-4 pb-1">Cá Tầm Sống</div>
+            <div class="d-flex align-content-center justify-content-center">
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span></div>
+            <div class="price">$ 60.0</div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer Start -->
+<div class="container-fluid bg-secondary text-dark mt-5 pt-5">
+    <div class="row px-xl-5 pt-5">
+        <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+            <a href="" class="text-decoration-none">
+                <h1 class="mb-4 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border border-white px-3 mr-1">E</span>Shopper</h1>
+            </a>
+            <p>Dolore erat dolor sit lorem vero amet. Sed sit lorem magna, ipsum no sit erat lorem et magna ipsum dolore amet erat.</p>
+            <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
+            <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
+            <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+        </div>
+        <div class="col-lg-8 col-md-12">
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                        <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                        <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                        <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                        <a class="text-dark mb-2" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                        <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                        <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                        <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                        <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                        <a class="text-dark mb-2" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                        <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
+                    <form action="">
+                        <div class="form-group">
+                            <input type="text" class="form-control border-0 py-4" placeholder="Your Name" required="required" />
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control border-0 py-4" placeholder="Your Email"
+                                   required="required" />
+                        </div>
+                        <div>
+                            <button class="btn btn-primary btn-block border-0 py-3" type="submit">Subscribe Now</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row border-top border-light mx-xl-5 py-4">
+        <div class="col-md-6 px-xl-0">
+            <p class="mb-md-0 text-center text-md-left text-dark">
+                &copy; <a class="text-dark font-weight-semi-bold" href="#">Your Site Name</a>. All Rights Reserved. Designed
+                by
+                <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML Codex</a><br>
+                Distributed By <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+            </p>
+        </div>
+        <div class="col-md-6 px-xl-0 text-center text-md-right">
+            <img class="img-fluid" src="img/payments.png" alt="">
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+</body>
+
+</html>
