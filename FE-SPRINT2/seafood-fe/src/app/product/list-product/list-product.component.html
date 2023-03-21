@@ -1,0 +1,62 @@
+<a class="btn btn-outline-success" [routerLink]="['/product/create']">Thêm mới sản phẩm</a>
+
+<table class="table table-success table-hover" style="margin-top: 50px">
+  <thead>
+  <tr>
+    <th>STT</th>
+    <th>Tên sản phẩm</th>
+    <th>Loại sản phẩm</th>
+    <th>Xuất xứ</th>
+    <th>Đơn giá(/kg)</th>
+    <th>Kích thước</th>
+    <th>Hình ảnh</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr >
+    <td>1</td>
+    <td>Cua</td>
+    <td>Đông lạnh</td>
+    <td>Mỹ</td>
+    <td>1500000</td>
+    <td>
+      <select class="badge-success">
+        <option value="1">1 kg</option>
+        <option value="2">2 kg</option>
+        <option value="3">3 kg</option>
+      </select>
+    </td>
+    <td></td>
+    <td>
+      <button class="btn btn-outline-success" routerLink="['/customer/edit',cus.id]" >Chỉnh sửa</button>
+    </td>
+    <td>
+      <a class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" click="temp = cus">
+        Xóa
+      </a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<!--modal delete-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+     data-bs-keyboard="false" data-bs-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+      </div>
+      <div class="modal-body">
+        <p >Bạn có chắc muốn xóa thông tin của: </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" data-bs-dismiss="modal" class="btn btn-primary" click="deleteCustomer()">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

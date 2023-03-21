@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="card">
+    <div class="container-fliud">
+
+
+    </div>
+  </div>
+</div>
+
+<div class="wrapper" style="background-color: #abdde5">
+  <div class="container main">
+    <div class="row">
+
+      <!-------Image-------->
+      <div class="col-md-6 side-image"
+           style="background-image: url('https://elements-cover-images-0.imgix.net/1df78dfe-1c45-4d9e-8ebc-5709a60eb9a1?auto=compress&crop=edges&fit=crop&fm=jpeg&h=630&w=1200&s=c1d5063145edcc73926f0dfa9a2d4abf')">
+
+      </div>
+
+      <div class="col-md-6 right">
+        <div class="input-box">
+          <form [formGroup]="signInForm" (ngSubmit)="submit()">
+            <header>ĐĂNG NHẬP</header>
+            <hr>
+            <div class="input-field">
+              <input formControlName="userName" type="text" class="input" id="email" required autocomplete="off">
+              <label for="email">Tên đăng nhập</label>
+              <div class="text-danger"
+                   *ngIf="signInForm.controls.userName.invalid && signInForm.controls.userName.touched else elseBlock">
+                <span *ngIf="signInForm.controls.userName.hasError('required')"><i class="fa-solid fa-triangle-exclamation"></i>&nbsp;Tên tài khoản không được để trống.</span>
+                <span *ngIf="signInForm.controls.userName.hasError('minlength')"><i class="fa-solid fa-triangle-exclamation"></i>&nbsp;Tên tài khoản không nhỏ hơn 3 ký tự.</span>
+                <span *ngIf="signInForm.controls.userName.hasError('maxlength')"><i class="fa-solid fa-triangle-exclamation"></i>&nbsp;Tên tài khoản không được quá 100 ký tự.</span>
+              </div>
+              <ng-template #elseBlock><br></ng-template>
+            </div>
+            <div class="input-field">
+              <input formControlName="password"  type="password" class="input" id="password" required>
+              <label for="password">Mật khẩu</label>
+              <div class="text-danger"
+                   *ngIf="signInForm.controls.password.invalid && signInForm.controls.password.touched else elseBlock">
+                <span *ngIf="signInForm.controls.password.hasError('required')"><i class="fa-solid fa-triangle-exclamation"></i>&nbsp;Tên tài khoản không được để trống.</span>
+                <span *ngIf="signInForm.controls.password.hasError('minlength')"><i class="fa-solid fa-triangle-exclamation"></i>&nbsp;Tên tài khoản không nhỏ hơn 3 ký tự.</span>
+                <span *ngIf="signInForm.controls.password.hasError('maxlength')"><i class="fa-solid fa-triangle-exclamation"></i>&nbsp;Tên tài khoản không được quá 100 ký tự.</span>
+              </div>
+              <ng-template #elseBlock><br></ng-template>
+            </div>
+
+            <div class="input-field">
+              <input type="submit" class="submit" value="Đăng nhập">
+
+            </div>
+            <div class="signin">
+              <span>Chưa có tài khoản? <a [routerLink]="['/login/register']">Đăng ký</a></span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
