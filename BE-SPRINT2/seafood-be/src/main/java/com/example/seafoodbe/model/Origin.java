@@ -8,7 +8,7 @@ public class Origin {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-    private String origin;
+    private String originName;
 
     @OneToMany(mappedBy = "origin")
     private List<Product> productList;
@@ -25,11 +25,11 @@ public class Origin {
     }
 
     public String getOrigin() {
-        return origin;
+        return originName;
     }
 
     public void setOrigin(String origin) {
-        this.origin = origin;
+        this.originName = origin;
     }
 
     public List<Product> getProductList() {

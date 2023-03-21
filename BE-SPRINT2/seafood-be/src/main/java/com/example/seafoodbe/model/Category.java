@@ -8,7 +8,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY )
     private Integer id;
-    private String category;
+    private String categoryName;
 
     @OneToMany(mappedBy = "category")
     private List<Product> productList;
@@ -24,12 +24,12 @@ public class Category {
         this.id = id;
     }
 
-    public String getCategory() {
-        return category;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public List<Product> getProductList() {

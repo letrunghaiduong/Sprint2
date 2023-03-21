@@ -1,7 +1,6 @@
 
 <!-- Topbar Start -->
 <div class="container-fluid" style="background-color: skyblue">
-
   <div class="row align-items-center py-3 px-xl-5">
     <div class="col-lg-2 d-none d-lg-block">
       <a class="text-decoration-none" href="#">
@@ -10,18 +9,15 @@
       </a>
     </div>
     <div class="col-lg-5 col-8 text-left">
-      <form action="">
         <div class="justify-content-center d-flex">
-          <input style="border-radius: 30px; font-size: 25px" class="form-control m-1" type="search"
+          <input style="border-radius: 30px; font-size: 25px" class="form-control m-1" #search type="search"
                  placeholder="Tìm kiếm"
                  aria-label="Search">
-          <button style="border-radius: 30px; background-color: white;font-size: 25px" class="btn btn-primary border m-1">
+          <button style="border-radius: 30px; background-color: white;font-size: 25px" (click)="onSubmit(search.value)" class="btn btn-primary border m-1">
             <i class="fa fa-search" style="border-radius: 30px; color: #D19C97"></i>
           </button>
         </div>
-      </form>
     </div>
-
 
 
     <div class="col-lg-2 col-4 text-right" >

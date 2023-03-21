@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {TokenService} from "../../service/token.service";
 import Swal from "sweetalert2";
+import {MessageService} from "../../service/message.service";
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-header',
@@ -11,8 +13,10 @@ export class HeaderComponent implements OnInit {
   checkLogin = false
   role: string[] = []
   name: string | null | undefined;
+  search: string = "";
 
-  constructor(private tokenService: TokenService) {
+  constructor(private tokenService: TokenService,
+              private messageService: MessageService) {
     if (this.tokenService.getToken()){
       this.role = this.tokenService.getRole()
       this.name = this.tokenService.getName()
@@ -38,5 +42,9 @@ export class HeaderComponent implements OnInit {
         location.reload()
         }
       })
+  }
+  onSubmit(search: string){
+    this.messageService.changeMassege(search);
+    console.log(search)
   }
 }

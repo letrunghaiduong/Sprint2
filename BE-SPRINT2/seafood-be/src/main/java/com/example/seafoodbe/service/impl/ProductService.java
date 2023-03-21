@@ -1,5 +1,6 @@
 package com.example.seafoodbe.service.impl;
 
+import com.example.seafoodbe.model.IProduct;
 import com.example.seafoodbe.model.Product;
 import com.example.seafoodbe.repository.IProductRepository;
 import com.example.seafoodbe.service.IProductService;
@@ -20,7 +21,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Page<Product> showList(String search, Pageable pageable) {
+    public Page<IProduct> showList(String search, Pageable pageable) {
         return productRepository.showList(search, pageable);
     }
 }

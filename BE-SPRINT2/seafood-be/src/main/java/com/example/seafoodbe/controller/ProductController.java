@@ -1,5 +1,6 @@
 package com.example.seafoodbe.controller;
 
+import com.example.seafoodbe.model.IProduct;
 import com.example.seafoodbe.model.Product;
 import com.example.seafoodbe.service.impl.ProductService;
 import org.springframework.beans.BeanUtils;
@@ -24,10 +25,12 @@ public class ProductController {
 
     @GetMapping("/list")
     private ResponseEntity<?> showList(@RequestParam(defaultValue = "", required = false) String search,
-                                       @PageableDefault(size = 5) Pageable pageable) {
-        Page<Product> productList = productService.showList(search, pageable);
+                                       @PageableDefault(size = 4) Pageable pageable) {
+        Page<IProduct> productList = productService.showList(search, pageable);
         return new ResponseEntity<>(productList, HttpStatus.OK);
     }
+
+
 
     @PostMapping("/add")
     private ResponseEntity<?> addSupplier(@RequestBody Product product ) {
