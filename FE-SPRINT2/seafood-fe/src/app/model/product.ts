@@ -6,10 +6,9 @@ import {Size} from "./size";
 export interface Product {
   id?: number
   name?: string
-  category?: Category
-  origin?: Origin
+  category?: string
+  origin?: string
   price?: number
-  flagDelete?: boolean
   image?: string
 
 }

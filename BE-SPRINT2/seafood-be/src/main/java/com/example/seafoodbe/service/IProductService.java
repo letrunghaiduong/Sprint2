@@ -10,4 +10,6 @@ public interface IProductService {
 
     void addProduct(String name, double price, Integer categoryId, Integer originId);
     Page<IProduct> showList(String search, Pageable pageable);
+
+    IProduct findByIdProduct(Integer productId);
 }

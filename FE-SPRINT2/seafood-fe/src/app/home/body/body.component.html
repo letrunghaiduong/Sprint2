@@ -33,15 +33,12 @@
     <div class="container-fluid p-0">
       <a class="navbar-brand text-uppercase fw-800" href="#">
         Sản phẩm
-        <span class="border-red pe-2">bán chạy
-                </span>
+<!--        <span class="border-red pe-2">bán chạy </span>-->
       </a>
-
     </div>
   </nav>
   <div class="row">
-
-    <div *ngFor="let p of productList" class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3" [routerLink]="['/product/detail']">
+    <div *ngFor="let p of productList" class="col-lg-3 col-sm-6 rating d-flex flex-column align-items-center justify-content-center product-item my-3" [routerLink]="['/product/detail',p.id]">
       <div class="product">
         <img src="{{p.image}}"
              alt="">
@@ -49,20 +46,30 @@
           <li class="icon">
             <i class="fas fa-shopping-cart text-primary"></i>
           </li>
-          <!--                    <li class="icon mx-3"><span class="far fa-heart"></span></li>-->
-          <!--                    <li class="icon"><span class="fas fa-shopping-bag"></span></li>-->
+<!--                              <li class="icon mx-3"><span class="far fa-heart"></span></li>-->
+<!--                              <li class="icon"><span class="fas fa-shopping-bag"></span></li>-->
         </ul>
       </div>
 <!--      <div class="tag bg-red">sale</div>-->
       <div class="title pt-4 pb-1">{{p.name}}</div>
-      <div class="d-flex align-content-center justify-content-center">
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
+      <div class="d-flex align-content-center justify-content-center stars">
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star"></span>
       </div>
-      <div class="price">{{p.price}}/Kg</div>
+      <div class="price">{{p.price| currency:'VND':''}}<span style="font-size: 10px">/Kg</span></div>
+    </div>
+    <div class="col-12">
+      <a style="cursor: pointer; margin-left: 48%; color: #f44336; text-decoration: none" type="button"
+         (click)="getAll(size+1)" *ngIf="!last">
+        <i class="fas fa-angle-double-down" style="font-size: 30px"></i><br>
+      </a>
+      <a style="cursor: pointer; margin-left: 48%; color: #f44336; text-decoration: none" type="button"
+         (click)="getAll(size-1)" *ngIf="last">
+        <i class="fas fa-angle-double-up" style="font-size: 30px" (click)="scrollProduct()"></i><br>
+      </a>
     </div>
   </div>
 </div>
@@ -117,11 +124,11 @@
       <div class="tag bg-red">sale</div>
       <div class="title pt-4 pb-1">Cua Hoàng Đế - King Crab Sống</div>
       <div class="d-flex align-content-center justify-content-center">
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
 
       </div>
       <div class="price">$ 600.0</div>
@@ -140,11 +147,12 @@
       <div class="tag bg-black">sale</div>
       <div class="title pt-4 pb-1">Ghẹ Xanh Sống</div>
       <div class="d-flex align-content-center justify-content-center">
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span></div>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+      </div>
       <div class="price">$ 55.0</div>
     </div>
     <div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
@@ -161,12 +169,11 @@
       <div class="tag bg-green">new</div>
       <div class="title pt-4 pb-1"> Tôm Càng Xanh Sống</div>
       <div class="d-flex align-content-center justify-content-center">
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-
-        <span class="fas fa-star"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
       </div>
       <div class="price">$ 70.0</div>
     </div>
@@ -183,11 +190,11 @@
       </div>
       <div class="title pt-4 pb-1">Cá Chim Trắng Sống</div>
       <div class="d-flex align-content-center justify-content-center">
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
       </div>
       <div class="price">$ 60.0</div>
     </div>
@@ -206,11 +213,11 @@
       <div class="tag bg-red">sale</div>
       <div class="title pt-4 pb-1">Tôm Mũ Ni Đông Lạnh 5-7 Con</div>
       <div class="d-flex align-content-center justify-content-center">
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
       </div>
       <div class="price">$ 60.0</div>
     </div>
@@ -228,11 +235,12 @@
       <div class="tag bg-black">out of stock</div>
       <div class="title pt-4 pb-1">Cá Tuyết Alaska Nguyên Con</div>
       <div class="d-flex align-content-center justify-content-center">
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span></div>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+      </div>
       <div class="price">$ 55.0</div>
     </div>
     <div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
@@ -248,11 +256,12 @@
       </div>
       <div class="title pt-4 pb-1"> Trứng Cá Tầm Imperial Caviar</div>
       <div class="d-flex align-content-center justify-content-center">
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span></div>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+      </div>
       <div class="price">$ 70.0</div>
     </div>
     <div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
@@ -269,11 +278,12 @@
       <div class="tag bg-green">new</div>
       <div class="title pt-4 pb-1">Cá Tầm Sống</div>
       <div class="d-flex align-content-center justify-content-center">
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span>
-        <span class="fas fa-star"></span></div>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+      </div>
       <div class="price">$ 60.0</div>
     </div>
   </div>

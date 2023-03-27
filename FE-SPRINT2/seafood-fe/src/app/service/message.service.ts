@@ -5,11 +5,15 @@ import {BehaviorSubject, Observable} from "rxjs";
   providedIn: 'root'
 })
 export class MessageService {
+
   private result = new BehaviorSubject<string>("");
+
   currentMessage = this.result.asObservable();
+
   constructor() { }
 
- changeMassege(message: string){
+ changeMassege(message: any){
     this.result.next(message);
  }
+
 }

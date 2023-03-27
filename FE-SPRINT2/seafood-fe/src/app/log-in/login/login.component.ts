@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {SecurityService} from "../../service/security.service";
 import {TokenService} from "../../service/token.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import Swal from "sweetalert2";
+import {Router} from "@angular/router";
+import {MessageService} from "../../service/message.service";
 
 @Component({
   selector: 'app-login',
@@ -14,11 +17,12 @@ export class LoginComponent implements OnInit {
 
   constructor(private securityService: SecurityService,
               private tokenService: TokenService,
-              private formBuilder : FormBuilder) { }
+              private formBuilder : FormBuilder,
+              private router: Router,
+              private messageService: MessageService) { }
 
   ngOnInit(): void {
     window.scrollTo(1900,700)
-
     this.getFormLogin()
   }
 
@@ -39,8 +43,9 @@ export class LoginComponent implements OnInit {
     this.tokenService.setEmail(data.email)
     this.tokenService.setName(data.name)
     this.tokenService.setRole(data.roles)
-    location.href = 'http://localhost:4200/'
+    this.messageService.changeMassege(data);
+    // location.href ='http://localhost:4200/'
+    this.router.navigateByUrl('/')
   })
-
   }
 }

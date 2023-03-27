@@ -1,5 +1,8 @@
 package com.example.seafoodbe.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,7 +13,7 @@ public class Product {
     private Integer id;
     private String name;
     private double price;
-
+    private String importDate;
 
     @Column(columnDefinition = "LONGTEXT")
     private String image;
@@ -19,18 +22,30 @@ public class Product {
     private boolean flagDelete;
 
     @ManyToOne
+    @JsonBackReference
     private Category category;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "product")
     private List<Image> imageList;
 
     @ManyToOne
+    @JsonBackReference
     private Origin origin;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "product")
     private List<Size> size;
 
     public Product() {
+    }
+
+    public String getImportDate() {
+        return importDate;
+    }
+
+    public void setImportDate(String importDate) {
+        this.importDate = importDate;
     }
 
     public String getImage() {

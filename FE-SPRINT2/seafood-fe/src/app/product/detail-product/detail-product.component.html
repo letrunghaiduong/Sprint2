@@ -5,84 +5,101 @@
         <div class="preview col-md-6" >
 
           <div class="preview-pic tab-content" style="width: 100%; height: 300px;border-radius: 15px">
+<!--            <div class="tab-pane active" id="{{imageList[0].id}}">-->
+<!--              <img style="width: 100%; height: 450px" src="{{imageList[0].image}}"/>-->
+<!--            </div>-->
+<!--            <div class="tab-pane" id="{{item.image}}" *ngFor="let item of imageList.slice(1)">-->
+<!--              <img style="width: 100%; height: 450px" src="{{item.image}}"/>-->
+<!--            </div>-->
             <div class="tab-pane active" id="pic-1">
-              <img style="width: 100%; height: 450px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgeVmjcUOLm7tsfjLgDArqeWwEvG41UG_RNw&usqp=CAU"/>
+              <img style="width: 500px; height: 450px" src="{{imageList[0].image}}"/>
             </div>
             <div class="tab-pane" id="pic-2">
-              <img style="width: 100%; height: 450px" src="https://www.locbien.net/images/02-cua/201-cua-king-song/cua-hoang-de-song_3_abfae.jpg"/>
+              <img style="width: 500px; height: 450px" src="{{imageList[1].image}}"/>
             </div>
             <div class="tab-pane" id="pic-3">
-              <img style="width: 100%; height: 450px" src="https://tomhum.com.vn/cdn1/images/201910/goods_img/xcua-hoang-de-G1567-1569986688832.jpg.pagespeed.ic.o8Jd1brwnj.jpg"/>
+              <img style="width: 500px; height: 450px" src="{{imageList[2].image}}"/>
             </div>
             <div class="tab-pane" id="pic-4">
-              <img style="width: 100%; height: 450px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFuLbaD6OArdt7dXZ0egdB04fWX8iU9ch5mA&usqp=CAU"/>
+              <img style="width: 500px; height: 450px" src="{{imageList[3].image}}"/>
             </div>
             <div class="tab-pane" id="pic-5">
-              <img style="width: 100%; height: 450px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxse8HLVnr7zqxZKQDODCTTtAUlPVO25u8Dg&usqp=CAU"/>
+              <img style="width: 500px; height: 450px" src="{{imageList[4].image}}"/>
             </div>
           </div>
           <ul class="preview-thumbnail nav nav-tabs" >
+<!--            <li class="active">-->
+<!--              <a data-target="{{'#'+imageList[0].id}}" data-toggle="tab">-->
+<!--                <img style="width: 100%; height: 100%" src="{{imageList[0].image}}"/>-->
+<!--              </a>-->
+<!--            </li>-->
+<!--            <li  *ngFor="let item of imageList.slice(1)">-->
+<!--              <a data-target="{{'#'+item.id}}" data-toggle="tab">-->
+<!--                <img style="width: 100%; height: 100%" src="{{item.image}}"/>-->
+<!--              </a>-->
+<!--            </li>-->
             <li class="active">
               <a data-target="#pic-1" data-toggle="tab">
-                <img style="width: 100%; height: 100%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgeVmjcUOLm7tsfjLgDArqeWwEvG41UG_RNw&usqp=CAU"/>
+                <img style="width: 100%; height: 100%" src="{{imageList[0].image}}"/>
               </a>
             </li>
             <li>
               <a data-target="#pic-2" data-toggle="tab">
-                <img style="width: 100%; height: 100%" src="https://www.locbien.net/images/02-cua/201-cua-king-song/cua-hoang-de-song_3_abfae.jpg"/>
+                <img style="width: 100%; height: 100%" src="{{imageList[1].image}}"/>
               </a>
             </li>
             <li>
               <a data-target="#pic-3" data-toggle="tab">
-                <img style="width: 100%; height: 100%" src="https://tomhum.com.vn/cdn1/images/201910/goods_img/xcua-hoang-de-G1567-1569986688832.jpg.pagespeed.ic.o8Jd1brwnj.jpg"/>
+                <img style="width: 100%; height: 100%" src="{{imageList[2].image}}"/>
               </a>
             </li>
             <li>
               <a data-target="#pic-4" data-toggle="tab">
-                <img style="width: 100%; height: 100%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFuLbaD6OArdt7dXZ0egdB04fWX8iU9ch5mA&usqp=CAU"/>
+                <img style="width: 100%; height: 100%" src="{{imageList[3].image}}"/>
               </a>
             </li>
             <li>
               <a data-target="#pic-5" data-toggle="tab">
-                <img style="width: 100%; height: 100%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxse8HLVnr7zqxZKQDODCTTtAUlPVO25u8Dg&usqp=CAU"/>
+                <img style="width: 100%; height: 100%" src="{{imageList[4].image}}"/>
               </a>
             </li>
           </ul>
 
         </div>
         <div class="details col-md-6">
-          <h3 class="product-title">CUA HOÀNG ĐẾ SỐNG</h3>
+          <h3 class="product-title">{{product.name}}</h3>
           <div class="rating">
             <div class="stars">
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
+              <span class="fa fa-star checked"></span>
               <span class="fa fa-star"></span>
             </div>
             <span class="review-no">41 reviews</span>
           </div>
-          <h4>Quy cách : 1kg - 3kg/ con</h4>
-          <h4>Đơn giá: 2.190.000đ/Kg</h4>
-          <h4>Tình trạng : Giao s.ống, tặng thùng xốp + đá khô.</h4>
-          <h4>Xuất Xứ : Canada - Mỹ</h4>
-          <h4>Món ngon: Hấp bia, hấp nước dừa, nướng phô mai</h4>
-          <h4 class="price">giá tiền: <span>2.999.999 VND</span></h4>
-          <select name="" id="" class="form-control-lg price w-50" >
-            <option value="">Chọn size</option>
-            <option value="">1kg</option>
-            <option value="">2kg</option>
-            <option value="">2,5kg</option>
-            <option value="">3kg</option>
+<!--          <h4>{{product.category}}</h4>-->
+          <span style="font-size:15px">⚡ Giao Nhanh 2H</span>
+          <span style="font-size:15px">👍 Cam Kết 1 Đổi 1 Nếu Không Đạt Chất Lượng</span>
+          <p><span style="font-size:16px">🔥 Gọi Ngay Hotline 📞0906789543📞 Để Được Tư Vấn Và Mua Hàng</span></p>
+          <p>🎁 Miễn phí giao hàng T4 &amp; T5 hàng tuần</p>
+          <h5>Đơn giá: {{product.price| currency:'VND':''}}<span style="font-size: 13px">/Kg</span></h5>
+
+          <h5>Xuất Xứ : {{product.origin}}</h5>
+          <h5 class="price">giá tiền: <span >{{totalPrice| currency:'VND':''}} VND</span></h5>
+
+          <select class="form-control-sm price w-50" [(ngModel)]="selectedSize" (change)="calculatePrice()">
+            <option [value]="0" selected>Chọn size</option>
+            <option [value]="size.size" *ngFor="let size of sizeList" >{{size.size}} Kg</option>
           </select>
 
 
           <br>
           <div class="action">
-            <div class="col-lg-2 col-4 text-right">
+            <div class="col-12 text-left">
               <a href="" class="btn border rounded-pill "
                  style="background-color: white; font-size: 25px">
-                <i class="fas fa-shopping-cart text-primary"></i>
+                <i class="fas fa-shopping-cart text-primary">  </i>  Thêm vào giỏ hàng
               </a>
             </div>
           </div>

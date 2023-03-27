@@ -1,6 +1,7 @@
 package com.example.seafoodbe.controller;
 
 import com.example.seafoodbe.model.IProduct;
+import com.example.seafoodbe.model.Image;
 import com.example.seafoodbe.model.Product;
 import com.example.seafoodbe.service.impl.ProductService;
 import org.springframework.beans.BeanUtils;
@@ -14,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RequestMapping("api/product")
@@ -36,6 +38,18 @@ public class ProductController {
     private ResponseEntity<?> addSupplier(@RequestBody Product product ) {
         productService.addProduct(product.getName(),product.getPrice(),product.getCategory().getId(),product.getOrigin().getId());
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+
+    @GetMapping("/findById")
+    private ResponseEntity<?> findById(@RequestParam(defaultValue = "", required = false) Integer productId) {
+        if (productId == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }else {
+            IProduct product = productService.findByIdProduct(productId);
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        }
+
     }
 
 }

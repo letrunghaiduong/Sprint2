@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {Observable, Subject} from "rxjs";
 const TOKEN_KEY = 'Token_key';
 const NAME_KEY = 'Name_key';
 const ROLE_KEY = 'Role_key';
@@ -11,13 +12,13 @@ const AVATAR_KEY = 'Avatar_key';
 })
 export class TokenService {
   public roles = [];
-
   constructor() { }
 
   public setId(id: string): void {
     sessionStorage.removeItem(ID_KEY);
     sessionStorage.setItem(ID_KEY, id);
   }
+
   public getId(): string | null {
     return sessionStorage.getItem(ID_KEY);
   }
@@ -71,6 +72,4 @@ export class TokenService {
     }
     return this.roles;
   }
-
-
 }

@@ -11,7 +11,7 @@
     <div class="col-lg-5 col-8 text-left">
         <div class="justify-content-center d-flex">
           <input style="border-radius: 30px; font-size: 25px" class="form-control m-1" #search type="search"
-                 placeholder="Tìm kiếm"
+                 placeholder="Nhập sản phẩm..."
                  aria-label="Search">
           <button style="border-radius: 30px; background-color: white;font-size: 25px" (click)="onSubmit(search.value)" class="btn btn-primary border m-1">
             <i class="fa fa-search" style="border-radius: 30px; color: #D19C97"></i>
@@ -58,7 +58,7 @@
           <div class="col-md-1"></div>
           <div class="col-md-6 col-12 d-flex justify-content-between">
             <div class="navbar-nav mr-auto py-0">
-              <a href="#" class="nav-item nav-link mr-3">TRANG CHỦ</a>
+              <a href="" class="nav-item nav-link mr-3">TRANG CHỦ</a>
               <a href="#" class="nav-item nav-link mr-3">HỆ THỐNG CỬA HÀNG</a>
               <a href="#" class="nav-item nav-link mr-3">LIÊN HỆ</a>
               <div class="nav-item dropdown" *ngIf="role[0]=='ADMIN'">
@@ -124,43 +124,45 @@
       <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
            id="navbar-vertical">
         <div class="navbar-nav w-100 border-top overflow-hidden" style="height: 410px">
-          <a href="" class="nav-item nav-link">
-            Sản phẩm bán chạy
-            <img class=" heightwidth-auto" width="20" height="20" src="https://file.hstatic.net/1000030244/file/icon-08_b334d328e22b4a65805bb434f3a1b148.png" alt="ban chay nhat">
-          </a>
-          <a href="" class="nav-item nav-link">
-            Khuyến mãi
-            <img class=" heightwidth-auto" width="20" height="20" src="https://file.hstatic.net/1000030244/file/sale-01-02_46421e90f6ef4755b5bdfa3da8f21e3b.png" alt="khuyen mai">
-          </a>
-          <a href="" class="nav-item nav-link">
-            Tươi sống
+<!--          <a href="" class="nav-item nav-link btn" style="text-align: left">-->
+<!--            Sản phẩm bán chạy-->
+<!--            <img class=" heightwidth-auto" width="20" height="20" src="https://file.hstatic.net/1000030244/file/icon-08_b334d328e22b4a65805bb434f3a1b148.png" alt="ban chay nhat">-->
+<!--          </a>-->
+          <a class="nav-item nav-link btn" (click)="onSubmit('Hải sản tươi')" style="text-align: left">
+            Hải sản tươi sống
             <img class=" heightwidth-auto" width="20" height="20" src="https://file.hstatic.net/1000030244/file/tuoi_song_2c1a154223c740c289c5f6c708cc20be.png" alt="100 tuoi song">
           </a>
-          <a href="" class="nav-item nav-link">
+          <a class="nav-item nav-link btn" (click)="onSubmit('Hải sản đông lạnh')" style="text-align: left">
             Hải sản đông lạnh
-            <img class=" heightwidth-auto" width="20" height="20" src="https://file.hstatic.net/1000030244/file/dong_lanh_745fd86a7d5b469aa93903a836ac8452.png" alt="hai san dong lanh">
+            <img class=" heightwidth-auto" width="20" height="20" src="https://cdn-icons-png.flaticon.com/512/3915/3915582.png" alt="hai san dong lanh">
           </a>
-          <a href="" class="nav-item nav-link">
-            Hải sản nhập khẩu
-            <img class=" heightwidth-auto" width="20" height="20" src="https://file.hstatic.net/1000030244/file/icon-18_5e5a5dbb4e95410d9533ae2e1a83f3e4.png" alt="hai san nhap khau">
-          </a>
-          <a href="" class="nav-item nav-link">
-            Cua - Ghẹ
+          <a class="nav-item nav-link btn" (click)="onSubmit('Ghẹ')" style="text-align: left">
+            Ghẹ
             <img class=" heightwidth-auto" width="20" height="20" src="https://file.hstatic.net/1000030244/file/icon-13_82965483df694fba920f852cae02d35e.png" alt="cua ghe">
           </a>
-          <a href="" class="nav-item nav-link">
-            Tôm các loại
-            <img class=" heightwidth-auto" width="20" height="20" src="https://file.hstatic.net/1000030244/file/icon-14_226abb4bfbcf4247b3b9dbc1af07b31f.png" alt="tom cac loai">
+          <a class="nav-item nav-link btn" (click)="onSubmit('Cua')" style="text-align: left">
+            Cua
+            <img class=" heightwidth-auto" width="20" height="20" src="https://cdn-icons-png.flaticon.com/512/2931/2931496.png" alt="cua ghe">
           </a>
-          <a href="" class="nav-item nav-link">
-            Sò - Ốc
+          <a class="nav-item nav-link btn" (click)="onSubmit('Tôm')" style="text-align: left">
+            Tôm các loại
+            <img class=" heightwidth-auto" width="20" height="20"  src="https://cdn-icons-png.flaticon.com/512/3712/3712842.png" alt="tom cac loai">
+          </a>
+          <a class="nav-item nav-link btn" (click)="onSubmit('Sò')" style="text-align: left">
+            Sò
             <img class=" heightwidth-auto" width="20" height="20" src="https://file.hstatic.net/1000030244/file/icon-12_7c3e9adde67340c8afc81a50cf436da3.png" alt="ngao so oc">
           </a>
-          <a href="" class="nav-item nav-link">Cá
-            <img class=" heightwidth-auto" width="20" height="20" src="https://file.hstatic.net/1000030244/file/icon-15_ddec0f58f3204735a177f0018a3e3553.png" alt="ca">
+          <a class="nav-item nav-link btn" (click)="onSubmit('Ốc')" style="text-align: left">
+            Ốc
+            <img class=" heightwidth-auto" width="20" height="20" src="https://cdn-icons-png.flaticon.com/512/826/826908.png" alt="ngao so oc">
           </a>
-          <a href="" class="nav-item nav-link">Mực
-            <img class=" heightwidth-auto" width="20" height="20" src="https://file.hstatic.net/1000030244/file/icon-16_7a27668ddf0e4aa8bb88bf2e665295d2.png" alt="muc">                    </a>
+          <a  class="nav-item nav-link btn" (click)="onSubmit('Cá')" style="text-align: left">
+            Cá
+            <img class=" heightwidth-auto" width="20" height="20" src="https://cdn-icons-png.flaticon.com/512/9763/9763694.png" alt="ca">
+          </a>
+          <a  class="nav-item nav-link btn" (click)="onSubmit('Mực')" style="text-align: left">
+            Mực
+            <img class=" heightwidth-auto" width="20" height="20" src="https://cdn-icons-png.flaticon.com/512/5100/5100804.png" alt="muc">                    </a>
         </div>
       </nav>
     </div>

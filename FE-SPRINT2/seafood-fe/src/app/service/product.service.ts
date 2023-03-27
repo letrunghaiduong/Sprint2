@@ -15,5 +15,8 @@ export class ProductService {
    return  this.httpClient.get<Product[]>(this.API_PRODUCT+'/list?search='+search+'&page='+page)
   }
 
+  findById(productId: number){
+    return this.httpClient.get<Product>(this.API_PRODUCT+ '/findById?productId='+productId)
+  }
 
 }

@@ -1,5 +1,7 @@
 package com.example.seafoodbe.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -8,9 +10,10 @@ public class Size {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY )
     private Integer id;
-    private String size;
+    private double size;
     private int quantity;
 
+    @JsonBackReference
     @ManyToOne
     private Product product;
 
@@ -33,11 +36,11 @@ public class Size {
         this.id = id;
     }
 
-    public String getSize() {
+    public double getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize(double size) {
         this.size = size;
     }
 

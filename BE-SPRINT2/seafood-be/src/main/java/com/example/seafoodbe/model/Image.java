@@ -1,5 +1,7 @@
 package com.example.seafoodbe.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,6 +15,7 @@ public class Image {
     private String image;
 
     @ManyToOne
+    @JsonBackReference
     private Product product;
 
     public Image() {

@@ -11,11 +11,11 @@ import {MessageService} from "../../service/message.service";
   styleUrls: ['./body.component.css']
 })
 export class BodyComponent implements OnInit {
-
-
-  nums: number[] = [];
   search: string = ''
   productList:Product[] = []
+  last: any;
+  first: any;
+  size = 0;
   constructor(private productService: ProductService,
               private messageService: MessageService) {
     this.getAll(0);
@@ -25,31 +25,12 @@ export class BodyComponent implements OnInit {
     this.messageService.currentMessage.subscribe(mes =>{
       window.scrollTo(1900,800)
       this.search = mes;
-      this.productService.getAll(this.search,0).subscribe(data=>{
-        console.log(data)
-        // @ts-ignore
-        if (data['content'].length == 0) {
-          Swal.fire({
-            position: 'center',
-            icon: 'warning',
-            title: 'Không tìm thấy',
-            text: 'Kết quả bạn cần tìm là: ' + '" ' + this.search + ' " ' + ' không có',
-            showConfirmButton: false,
-            timer: 2000
-          });
-        } else {
-          // @ts-ignore
-          this.productList = data['content'];
-          // this.nums = Array.from(Array(data.totalPages).keys());
-        }
-      })
-
+      this.getAll(0);
     })
   }
 
   getAll(page: number){
     this.productService.getAll(this.search,page).subscribe(data=>{
-      console.log(data)
       // @ts-ignore
       if (data['content'].length == 0) {
         Swal.fire({
@@ -63,8 +44,13 @@ export class BodyComponent implements OnInit {
       } else {
         // @ts-ignore
         this.productList = data['content'];
-        // this.nums = Array.from(Array(data.totalPages).keys());
+        // @ts-ignore
+        this.last = data['last'];
       }
     })
+  }
+
+  scrollProduct() {
+
   }
 }
