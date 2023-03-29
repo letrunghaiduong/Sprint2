@@ -3,6 +3,7 @@ package com.example.seafoodbe.controller;
 import com.example.seafoodbe.model.IProduct;
 import com.example.seafoodbe.model.Image;
 import com.example.seafoodbe.model.Product;
+import com.example.seafoodbe.service.IProductService;
 import com.example.seafoodbe.service.impl.ProductService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,27 +18,23 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RequestMapping("api/product")
 @RestController
 @CrossOrigin("*")
 public class ProductController {
     @Autowired
-    private ProductService productService;
+    private IProductService productService;
 
     @GetMapping("/list")
-    private ResponseEntity<?> showList(@RequestParam(defaultValue = "", required = false) String search,
+    private ResponseEntity<?> getAll(@RequestParam(defaultValue = "", required = false) String search,
                                        @PageableDefault(size = 4) Pageable pageable) {
         Page<IProduct> productList = productService.showList(search, pageable);
+        if (productList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(productList, HttpStatus.OK);
-    }
-
-
-
-    @PostMapping("/add")
-    private ResponseEntity<?> addSupplier(@RequestBody Product product ) {
-        productService.addProduct(product.getName(),product.getPrice(),product.getCategory().getId(),product.getOrigin().getId());
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 
@@ -46,10 +43,17 @@ public class ProductController {
         if (productId == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }else {
-            IProduct product = productService.findByIdProduct(productId);
+            Optional<Product> product = productService.findById(productId);
             return new ResponseEntity<>(product, HttpStatus.OK);
         }
 
+    }
+
+
+    @PostMapping("/add")
+    private ResponseEntity<?> addSupplier(@RequestBody Product product ) {
+        productService.addProduct(product.getName(),product.getPrice(),product.getCategory().getId(),product.getOrigin().getId());
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.seafoodbe.controller;
 
 import com.example.seafoodbe.model.Image;
+import com.example.seafoodbe.service.IImageService;
 import com.example.seafoodbe.service.impl.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,7 @@ import java.util.List;
 public class IImageController {
 
     @Autowired
-    private ImageService imageService;
+    private IImageService imageService;
 
     @GetMapping("/list")
     private ResponseEntity<?> showList(@RequestParam(defaultValue = "", required = false) Integer productId) {

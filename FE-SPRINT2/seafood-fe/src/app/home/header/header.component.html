@@ -23,7 +23,7 @@
     <div class="col-lg-2 col-4 text-right" >
       <a href="" class="btn border rounded-pill " style="background-color: white; font-size: 25px" [routerLink]="['/cart']">
         <i class="fas fa-shopping-cart text-primary"></i>
-                        <span class="badge">0</span>
+                        <span class="badge">{{carts.length}}</span>
       </a>
     </div>
 
@@ -58,7 +58,7 @@
           <div class="col-md-1"></div>
           <div class="col-md-6 col-12 d-flex justify-content-between">
             <div class="navbar-nav mr-auto py-0">
-              <a href="" class="nav-item nav-link mr-3">TRANG CHỦ</a>
+              <a (click)="home()" class="nav-item nav-link mr-3" style="cursor: pointer">TRANG CHỦ</a>
               <a href="#" class="nav-item nav-link mr-3">HỆ THỐNG CỬA HÀNG</a>
               <a href="#" class="nav-item nav-link mr-3">LIÊN HỆ</a>
               <div class="nav-item dropdown" *ngIf="role[0]=='ADMIN'">

@@ -50,8 +50,8 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password, String name, String email) {
-        this.userName = username;
+    public User(String userName, String password, String name, String email) {
+        this.userName = userName;
         this.password = password;
         this.name = name;
         this.email = email;
@@ -73,13 +73,6 @@ public class User {
         this.name = name;
     }
 
-    public String getUsername() {
-        return userName;
-    }
-
-    public void setUsername(String username) {
-        this.userName = username;
-    }
 
     public String getPassword() {
         return password;

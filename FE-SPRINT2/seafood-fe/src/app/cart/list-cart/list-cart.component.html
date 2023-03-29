@@ -9,18 +9,19 @@
                 <div class="p-5">
                   <div class="d-flex justify-content-between align-items-center mb-5">
                     <h1 class="fw-bold mb-0 text-black">Giỏ hàng</h1>
-                    <h6 class="mb-0 text-muted">3 items</h6>
+                    <h6 class="mb-0 text-muted">{{carts.length}} items</h6>
                   </div>
-                  <hr class="my-4">
 
-                  <div class="row mb-4 d-flex justify-content-between align-items-center">
+                  <hr class="my-4">
+                  <div class="row mb-4 d-flex justify-content-between align-items-center" *ngFor="let cart of carts">
+                    <hr>
                     <div class="col-md-2 col-lg-2 col-xl-2">
-                      <img src="https://product.hstatic.net/1000030244/product/king_acb9ccc565264c229197e2680892898d_grande.jpg"
+                      <img src="{{cart.image}}"
                            class="img-fluid rounded-3" alt="Cotton T-shirt">
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-3">
-                      <!--                                            <h6 class="text-muted">Shirt</h6>-->
-                      <h6 class="text-black mb-0">Cua hoàng đế</h6>
+                      <h6 class="text-black mb-0">{{cart.name}}</h6>
+<!--                      <h6 class="text-muted">{{cart.price}}<span style="font-size: 13px">/Kg</span></h6>-->
                     </div>
                     <div class="col-md-2 col-lg-2 col-xl-1 d-flex">
                       <select class="select form-control-sm">
@@ -31,67 +32,12 @@
                       </select>
                     </div>
                     <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1">
-                      <h6 class="mb-0">4.000.000 VND</h6>
+                      <h6 class="mb-0">{{cart.price}} VND</h6>
                     </div>
                     <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                       <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
                     </div>
                   </div>
-
-                  <hr class="my-4">
-
-                  <div class="row mb-4 d-flex justify-content-between align-items-center">
-                    <div class="col-md-2 col-lg-2 col-xl-2">
-                      <img src="https://product.hstatic.net/1000030244/product/ghe_6093c9d1438442aebf5e2fe7423ea47a_grande.jpg"
-                           class="img-fluid rounded-3" alt="Cotton T-shirt">
-                    </div>
-                    <div class="col-md-3 col-lg-3 col-xl-3">
-                      <!--                                            <h6 class="text-muted">Shirt</h6>-->
-                      <h6 class="text-black mb-0">Ghẹ xanh</h6>
-                    </div>
-                    <div class="col-md-2 col-lg-2 col-xl-1 d-flex">
-                      <select class="select form-control-sm">
-                        <option value="1">1kg</option>
-                        <option value="2">2kg</option>
-                        <option value="3">2,5kg</option>
-                        <option value="4">3kg</option>
-                      </select>
-                    </div>
-                    <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1">
-                      <h6 class="mb-0">300.000 VND</h6>
-                    </div>
-                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                      <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
-                    </div>
-                  </div>
-
-                  <hr class="my-4">
-
-                  <div class="row mb-4 d-flex justify-content-between align-items-center">
-                    <div class="col-md-2 col-lg-2 col-xl-2">
-                      <img src="https://product.hstatic.net/1000030244/product/tom-cang-xanh_2de015440edc4ddea5460b3e7883041f_grande.jpg"
-                           class="img-fluid rounded-3" alt="Cotton T-shirt">
-                    </div>
-                    <div class="col-md-3 col-lg-3 col-xl-3">
-                      <h6 class="text-muted">Tôm càng xanh</h6>
-                      <!--                                            <h6 class="text-black mb-0">Tôm càng xanh</h6>-->
-                    </div>
-                    <div class="col-md-2 col-lg-2 col-xl-1 d-flex">
-                      <select class="select form-control-sm">
-                        <option value="1">1kg</option>
-                        <option value="2">2kg</option>
-                        <option value="3">2,5kg</option>
-                        <option value="4">3kg</option>
-                      </select>
-                    </div>
-                    <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1">
-                      <h6 class="mb-0">400.000 VND</h6>
-                    </div>
-                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                      <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
-                    </div>
-                  </div>
-
                   <hr class="my-4">
                 </div>
               </div>

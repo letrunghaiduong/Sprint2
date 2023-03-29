@@ -6,11 +6,11 @@ import {Image} from "../model/image";
   providedIn: 'root'
 })
 export class ImageService {
-  API_SIZE = 'http://localhost:8080/api/image/'
+  API_IMAGE = 'http://localhost:8080/api/image/'
   constructor(private httpClient: HttpClient) { }
 
-  getAllSize(productId: number){
-    return  this.httpClient.get<Image>(this.API_SIZE + 'list?productId='+ productId);
+  getAllImage(productId: number){
+    return  this.httpClient.get<Image>(this.API_IMAGE + 'list?productId='+ productId);
   }
 
 }

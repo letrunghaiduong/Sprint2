@@ -79,25 +79,30 @@
             <span class="review-no">41 reviews</span>
           </div>
 <!--          <h4>{{product.category}}</h4>-->
+          <h5>Đơn giá: {{product.price| currency:'VND':''}}<span style="font-size: 13px">/Kg</span></h5>
+
           <span style="font-size:15px">⚡ Giao Nhanh 2H</span>
           <span style="font-size:15px">👍 Cam Kết 1 Đổi 1 Nếu Không Đạt Chất Lượng</span>
           <p><span style="font-size:16px">🔥 Gọi Ngay Hotline 📞0906789543📞 Để Được Tư Vấn Và Mua Hàng</span></p>
           <p>🎁 Miễn phí giao hàng T4 &amp; T5 hàng tuần</p>
-          <h5>Đơn giá: {{product.price| currency:'VND':''}}<span style="font-size: 13px">/Kg</span></h5>
 
-          <h5>Xuất Xứ : {{product.origin}}</h5>
-          <h5 class="price">giá tiền: <span >{{totalPrice| currency:'VND':''}} VND</span></h5>
-
-          <select class="form-control-sm price w-50" [(ngModel)]="selectedSize" (change)="calculatePrice()">
+<!--          <h5>Xuất Xứ : {{product.origin?.originName}}</h5>-->
+          <h5 class="price">giá tiền: <span *ngIf="selectedSize != 0" >{{totalPrice| currency:'VND':''}} VND</span></h5>
+          <form [formGroup]="form">
+          <select formControlName="size" class="form-control-sm price w-50" [(ngModel)]="selectedSize" (change)="calculatePrice()">
             <option [value]="0" selected>Chọn size</option>
             <option [value]="size.size" *ngFor="let size of sizeList" >{{size.size}} Kg</option>
           </select>
-
+            <div class="form-control-feedback" style="color: red"
+                 *ngIf="form.controls.size.hasError('required') && form.controls.size.touched">
+              Bản phải chọn kích thước
+            </div>
+          </form>
 
           <br>
           <div class="action">
             <div class="col-12 text-left">
-              <a href="" class="btn border rounded-pill "
+              <a class="btn border rounded-pill " (click)="addToCart()"
                  style="background-color: white; font-size: 25px">
                 <i class="fas fa-shopping-cart text-primary">  </i>  Thêm vào giỏ hàng
               </a>

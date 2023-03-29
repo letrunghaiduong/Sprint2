@@ -2,6 +2,7 @@ package com.example.seafoodbe.controller;
 
 import com.example.seafoodbe.model.Image;
 import com.example.seafoodbe.model.Size;
+import com.example.seafoodbe.service.ISizeService;
 import com.example.seafoodbe.service.impl.ImageService;
 import com.example.seafoodbe.service.impl.SizeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.List;
 @CrossOrigin("*")
 public class SizeController {
     @Autowired
-    private SizeService sizeService;
+    private ISizeService sizeService;
 
     @GetMapping("/list")
     private ResponseEntity<?> showList(@RequestParam(defaultValue = "", required = false) Integer productId) {

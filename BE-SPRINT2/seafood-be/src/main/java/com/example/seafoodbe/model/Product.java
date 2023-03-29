@@ -2,6 +2,7 @@ package com.example.seafoodbe.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,20 +23,20 @@ public class Product {
     private boolean flagDelete;
 
     @ManyToOne
-    @JsonBackReference
     private Category category;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "product")
     private List<Image> imageList;
 
     @ManyToOne
-    @JsonBackReference
     private Origin origin;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "product")
     private List<Size> size;
+
+
 
     public Product() {
     }

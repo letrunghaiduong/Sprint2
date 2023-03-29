@@ -11,7 +11,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Optional;
+
 
 public interface IProductRepository extends JpaRepository<Product, Integer> {
 
@@ -50,4 +51,7 @@ public interface IProductRepository extends JpaRepository<Product, Integer> {
             "join origin o on o.id = p.origin_id\n" +
             "where p.id = :productId",nativeQuery = true)
     IProduct findByIdProduct(@Param("productId") Integer productId);
+
+    Optional<Product> findById(Integer id);
+
 }

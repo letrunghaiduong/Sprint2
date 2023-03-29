@@ -15,7 +15,6 @@ public class Image {
     private String image;
 
     @ManyToOne
-    @JsonBackReference
     private Product product;
 
     public Image() {

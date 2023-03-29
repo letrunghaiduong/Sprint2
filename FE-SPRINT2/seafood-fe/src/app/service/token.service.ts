@@ -19,7 +19,7 @@ export class TokenService {
     sessionStorage.setItem(ID_KEY, id);
   }
 
-  public getId(): string | null {
+  public getId(): string | null | number{
     return sessionStorage.getItem(ID_KEY);
   }
 

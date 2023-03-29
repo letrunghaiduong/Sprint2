@@ -13,7 +13,6 @@ public class Size {
     private double size;
     private int quantity;
 
-    @JsonBackReference
     @ManyToOne
     private Product product;
 

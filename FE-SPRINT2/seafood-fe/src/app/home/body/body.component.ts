@@ -4,6 +4,7 @@ import {Product} from "../../model/product";
 import Swal from "sweetalert2";
 import {TokenService} from "../../service/token.service";
 import {MessageService} from "../../service/message.service";
+import {CartService} from "../../service/cart.service";
 
 @Component({
   selector: 'app-body',
@@ -17,7 +18,9 @@ export class BodyComponent implements OnInit {
   first: any;
   size = 0;
   constructor(private productService: ProductService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private tokenService: TokenService,
+              private cartService: CartService) {
     this.getAll(0);
   }
 
@@ -50,7 +53,24 @@ export class BodyComponent implements OnInit {
     })
   }
 
+
+  addToCart(product: Product) {
+    // this.cartService.addToCart(product.id,this.tokenService.getId()).subscribe(data=>{
+    //   Swal.fire({
+    //     position: 'center',
+    //     icon: 'success',
+    //     title: 'Đã thêm vào giỏ hàng!',
+    //     showConfirmButton: false,
+    //     timer: 3000
+    //   });
+    // })
+
+  }
+
+
   scrollProduct() {
 
   }
+
+
 }

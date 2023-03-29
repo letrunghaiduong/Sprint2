@@ -1,5 +1,7 @@
 package com.example.seafoodbe.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -13,7 +15,7 @@ public class Origin {
     private String originName;
 
     @OneToMany(mappedBy = "origin")
-    @JsonManagedReference
+    @JsonBackReference
     private List<Product> productList;
 
     public Origin() {

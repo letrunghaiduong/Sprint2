@@ -1,5 +1,7 @@
 package com.example.seafoodbe.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -12,8 +14,8 @@ public class Category {
     private Integer id;
     private String categoryName;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "category")
+    @JsonBackReference
     private List<Product> productList;
 
     public Category() {

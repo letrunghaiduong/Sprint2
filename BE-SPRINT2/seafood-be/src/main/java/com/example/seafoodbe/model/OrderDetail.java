@@ -1,5 +1,7 @@
 package com.example.seafoodbe.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,13 +11,41 @@ public class OrderDetail {
     private Integer id;
 
     @ManyToOne
-    private OrderProduct orderProduct;
+    private User user;
 
     @ManyToOne
     private Product product;
 
+    private double size;
+
+    @Column(columnDefinition = "bit default false")
+    private boolean flagDelete;
+
 
     public OrderDetail() {
+    }
+
+    public double getSize() {
+        return size;
+    }
+
+    public void setSize(double size) {
+        this.size = size;
+    }
+
+    public OrderDetail(Integer id, User user, Product product, boolean flagDelete) {
+        this.id = id;
+        this.user = user;
+        this.product = product;
+        this.flagDelete = flagDelete;
+    }
+
+    public boolean isFlagDelete() {
+        return flagDelete;
+    }
+
+    public void setFlagDelete(boolean flagDelete) {
+        this.flagDelete = flagDelete;
     }
 
     public Integer getId() {
@@ -26,12 +56,12 @@ public class OrderDetail {
         this.id = id;
     }
 
-    public OrderProduct getOrderProduct() {
-        return orderProduct;
+    public User getUser() {
+        return user;
     }
 
-    public void setOrderProduct(OrderProduct orderProduct) {
-        this.orderProduct = orderProduct;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Product getProduct() {

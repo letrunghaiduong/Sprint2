@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import {MessageService} from "../../service/message.service";
 import {FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
+import {CartService} from "../../service/cart.service";
 
 @Component({
   selector: 'app-header',
@@ -15,17 +16,21 @@ export class HeaderComponent implements OnInit {
   role: string[] = []
   name: string | null | undefined;
   search: string = "";
-
+  carts: any[] = []
 
   constructor(private tokenService: TokenService,
               private messageService: MessageService,
-              private router: Router) {
+              private router: Router,
+              private cartService: CartService) {
     this.messageService.currentMessage.subscribe(mes =>{
       if (this.tokenService.getToken()){
         this.role = this.tokenService.getRole()
         this.name = this.tokenService.getName()
         this.checkLogin = true
       }
+    })
+    this.cartService.getAllCart(this.tokenService.getId()).subscribe(data=>{
+      this.carts = data;
     })
 
   }
@@ -59,4 +64,7 @@ export class HeaderComponent implements OnInit {
     console.log(search)
   }
 
+  home() {
+    this.router.navigateByUrl('/')
+  }
 }
