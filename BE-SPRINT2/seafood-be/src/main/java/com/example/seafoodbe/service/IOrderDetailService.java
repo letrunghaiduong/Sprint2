@@ -7,11 +7,15 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface IOrderDetailService {
-    void addNew(Integer productId, Integer userId,double size);
+    void addNew(Integer productId, Integer userId,Integer quantity,double size);
 
     List<ICart> getAll(Integer userId);
 
-    void update(double size, Integer productId);
+    void update(Integer quantity, Integer productId,double size);
 
-    OrderDetail findByProductId(Integer productId);
+    void updateQuantity(Integer quantity, Integer productId,double size);
+
+    OrderDetail[] findByProductId(Integer productId);
+
+    void delete(Integer id);
 }

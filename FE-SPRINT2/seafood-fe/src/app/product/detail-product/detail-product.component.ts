@@ -13,6 +13,8 @@ import {OrderDetail} from "../../model/order-detail";
 import {UserService} from "../../service/user.service";
 import {User} from "../../model/user";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {MessageService} from "../../service/message.service";
+import {render} from "creditcardpayments/creditCardPayments";
 
 @Component({
   selector: 'app-detail-product',
@@ -30,14 +32,14 @@ export class DetailProductComponent implements OnInit {
   product: Product = {}
 
   form: FormGroup;
+  quantity = 0;
 
   constructor(private imageService: ImageService,
               private sizeService: SizeService,
               private productService: ProductService,
               private activatedRoute: ActivatedRoute,
               private tokenService: TokenService,
-              private cartService: CartService,
-              private userService: UserService) {
+              private cartService: CartService) {
     this.activatedRoute.paramMap.subscribe(next => {
       // @ts-ignore
       this.id = +next.get('id');
@@ -47,7 +49,9 @@ export class DetailProductComponent implements OnInit {
     });
     this.form = new FormGroup({
       size: new FormControl('',Validators.required),
+      quantity: new FormControl('',Validators.required),
     });
+
   }
 
   ngOnInit(): void {
@@ -87,7 +91,8 @@ export class DetailProductComponent implements OnInit {
 
   addToCart() {
     const size = this.form.value.size;
-    this.cartService.addToCart(this.product.id, this.tokenService.getId(),size).subscribe(data => {
+    const quantity = this.form.value.quantity;
+    this.cartService.addToCart(this.product.id, this.tokenService.getId(),quantity,size).subscribe(data => {
       Swal.fire({
         position: 'center',
         icon: 'success',

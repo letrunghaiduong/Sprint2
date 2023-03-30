@@ -87,9 +87,8 @@
           <p>🎁 Miễn phí giao hàng T4 &amp; T5 hàng tuần</p>
 
 <!--          <h5>Xuất Xứ : {{product.origin?.originName}}</h5>-->
-          <h5 class="price">giá tiền: <span *ngIf="selectedSize != 0" >{{totalPrice| currency:'VND':''}} VND</span></h5>
           <form [formGroup]="form">
-          <select formControlName="size" class="form-control-sm price w-50" [(ngModel)]="selectedSize" (change)="calculatePrice()">
+          <select formControlName="size" class="form-control-sm price" style="width: 45% " [(ngModel)]="selectedSize" (change)="calculatePrice()">
             <option [value]="0" selected>Chọn size</option>
             <option [value]="size.size" *ngFor="let size of sizeList" >{{size.size}} Kg</option>
           </select>
@@ -97,7 +96,12 @@
                  *ngIf="form.controls.size.hasError('required') && form.controls.size.touched">
               Bản phải chọn kích thước
             </div>
+
+          <input class="form-control-sm" style="width: 45% ; margin-left: 20px" formControlName="quantity" type="number" placeholder="Số lượng">
           </form>
+          <br>
+
+          <h5 class="price">giá tiền: <span *ngIf="selectedSize != 0" >{{totalPrice| currency:'VND':''}} VND</span></h5>
 
           <br>
           <div class="action">

@@ -16,8 +16,8 @@ public class OrderDetailService implements IOrderDetailService {
 
 
     @Override
-    public void addNew(Integer productId, Integer userId,double size) {
-        orderDetailRepository.addNew(productId, userId,size);
+    public void addNew(Integer productId, Integer userId,Integer quantity,double size) {
+        orderDetailRepository.addNew(productId, userId, quantity,size);
     }
 
     @Override
@@ -26,13 +26,23 @@ public class OrderDetailService implements IOrderDetailService {
     }
 
     @Override
-    public void update(double size, Integer productId) {
-        orderDetailRepository.update(size, productId);
+    public void update(Integer quantity, Integer productId,double size) {
+        orderDetailRepository.update(quantity, productId,size);
     }
 
     @Override
-    public OrderDetail findByProductId(Integer productId) {
+    public void updateQuantity(Integer quantity, Integer productId, double size) {
+        orderDetailRepository.updateQuantity(quantity, productId,size);
+    }
+
+    @Override
+    public OrderDetail[] findByProductId(Integer productId) {
         return orderDetailRepository.findByProductId(productId);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        orderDetailRepository.deleteById(id);
     }
 
 }

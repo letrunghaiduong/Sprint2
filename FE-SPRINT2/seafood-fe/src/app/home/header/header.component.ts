@@ -15,9 +15,7 @@ export class HeaderComponent implements OnInit {
   checkLogin = false
   role: string[] = []
   name: string | null | undefined;
-  search: string = "";
-  carts: any[] = []
-
+  length: any ;
   constructor(private tokenService: TokenService,
               private messageService: MessageService,
               private router: Router,
@@ -29,13 +27,14 @@ export class HeaderComponent implements OnInit {
         this.checkLogin = true
       }
     })
-    this.cartService.getAllCart(this.tokenService.getId()).subscribe(data=>{
-      this.carts = data;
-    })
+
 
   }
 
   ngOnInit(): void {
+    this.cartService.getAllCart(this.tokenService.getId()).subscribe(data=>{
+      this.length = data.length
+    })
   }
 
   logout() {

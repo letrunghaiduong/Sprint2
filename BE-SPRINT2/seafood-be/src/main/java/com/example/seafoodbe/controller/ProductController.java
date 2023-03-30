@@ -29,7 +29,7 @@ public class ProductController {
 
     @GetMapping("/list")
     private ResponseEntity<?> getAll(@RequestParam(defaultValue = "", required = false) String search,
-                                       @PageableDefault(size = 4) Pageable pageable) {
+                                     @PageableDefault(size = 4) Pageable pageable) {
         Page<IProduct> productList = productService.showList(search, pageable);
         if (productList.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

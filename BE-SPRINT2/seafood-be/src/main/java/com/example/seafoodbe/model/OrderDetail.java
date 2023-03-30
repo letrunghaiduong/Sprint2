@@ -18,11 +18,21 @@ public class OrderDetail {
 
     private double size;
 
+    private Integer quantity;
+
     @Column(columnDefinition = "bit default false")
     private boolean flagDelete;
 
 
     public OrderDetail() {
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public double getSize() {

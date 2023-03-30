@@ -29,15 +29,38 @@ public class OrderDetailController {
     @GetMapping("/add")
     private ResponseEntity<OrderDetail> addCart(@RequestParam(defaultValue = "", required = false) Integer productId,
                                                 @RequestParam(defaultValue = "", required = false) Integer userId,
+                                                @RequestParam(defaultValue = "", required = false) Integer quantity,
                                                 @RequestParam(required = false) double size) {
-        OrderDetail orderDetail = orderDetailService.findByProductId(productId);
-        if (orderDetail==null){
-            orderDetailService.addNew(productId, userId, size);
+
+        OrderDetail[] orderDetail = orderDetailService.findByProductId(productId);
+        if (orderDetail.length == 0){
+            orderDetailService.addNew(productId, userId,quantity ,size);
+            return new ResponseEntity<>(HttpStatus.OK);
         }else {
-            orderDetailService.update(size, productId);
+            for (int i = 0; i < orderDetail.length; i++) {
+                if (orderDetail[i].getSize() == size){
+                    orderDetailService.update(quantity, productId,size);
+                    return new ResponseEntity<>(HttpStatus.OK);
+                }
+            }
+            orderDetailService.addNew(productId, userId,quantity ,size);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
+
+    }
+
+    @GetMapping("/update")
+    private ResponseEntity<?> update(@RequestParam(defaultValue = "", required = false) Integer quantity,
+                                     @RequestParam(defaultValue = "", required = false) Integer productId,
+                                     @RequestParam(required = false) double size) {
+        orderDetailService.update(quantity, productId,size);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
+    @DeleteMapping("/delete")
+    private ResponseEntity<?> delete(@RequestParam(defaultValue = "", required = false) Integer id) {
+        orderDetailService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

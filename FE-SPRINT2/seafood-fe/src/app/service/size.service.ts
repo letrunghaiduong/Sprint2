@@ -10,6 +10,6 @@ export class SizeService {
   constructor(private httpClient: HttpClient) { }
 
   getAllSize(productId: number){
-    return  this.httpClient.get<Size>(this.API_SIZE + 'list?productId='+ productId);
+    return  this.httpClient.get<Size[]>(this.API_SIZE + 'list?productId='+ productId);
   }
 }

@@ -16,7 +16,7 @@ export class BodyComponent implements OnInit {
   productList:Product[] = []
   last: any;
   first: any;
-  size = 0;
+  size = 4;
   constructor(private productService: ProductService,
               private messageService: MessageService,
               private tokenService: TokenService,
@@ -32,8 +32,8 @@ export class BodyComponent implements OnInit {
     })
   }
 
-  getAll(page: number){
-    this.productService.getAll(this.search,page).subscribe(data=>{
+  getAll(size: number){
+    this.productService.getAll(this.search,size).subscribe(data=>{
       // @ts-ignore
       if (data['content'].length == 0) {
         Swal.fire({
@@ -49,21 +49,23 @@ export class BodyComponent implements OnInit {
         this.productList = data['content'];
         // @ts-ignore
         this.last = data['last'];
+        // @ts-ignore
+        this.size = data['size']
       }
     })
   }
 
 
-  addToCart(product: Product) {
-    // this.cartService.addToCart(product.id,this.tokenService.getId()).subscribe(data=>{
-    //   Swal.fire({
-    //     position: 'center',
-    //     icon: 'success',
-    //     title: 'Đã thêm vào giỏ hàng!',
-    //     showConfirmButton: false,
-    //     timer: 3000
-    //   });
-    // })
+  addToCart(productId: any) {
+    this.cartService.addToCart(productId, this.tokenService.getId(),1,1).subscribe(data=>{
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Đã thêm vào giỏ hàng!',
+        showConfirmButton: false,
+        timer: 3000
+      });
+    })
 
   }
 
