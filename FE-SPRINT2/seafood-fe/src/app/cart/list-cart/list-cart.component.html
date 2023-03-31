@@ -15,6 +15,7 @@
                   <hr class="my-4">
                   <div class="row mb-4 d-flex justify-content-between align-items-center" *ngFor="let cart of carts">
                     <hr>
+
                     <div class="col-md-2 col-lg-2 col-xl-2">
                       <img src="{{cart.image}}"
                            class="img-fluid rounded-3" alt="Cotton T-shirt">
@@ -24,7 +25,8 @@
                       <h6 class="text-muted">{{cart.size}}<span style="font-size: 13px">Kg</span></h6>
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                      <button class="btn btn-link px-2" [disabled]="cart.quantity==1" (click)="updateQuantity(cart.productId, cart.size, -1)">
+                      <button class="btn btn-link px-2" [disabled]="cart.quantity==1"
+                              (click)="updateQuantity(cart.productId, cart.size, -1)">
                         <i class="fas fa-minus"></i>
                       </button>
 
@@ -35,12 +37,18 @@
                         <i class="fas fa-plus"></i>
                       </button>
                     </div>
+
                     <div class="col-md-3 col-lg-3 col-xl-3 offset-lg-1">
-                      <h6 class="text-black mb-0">{{cart.price * cart.size * cart.quantity | currency:'VND':''}} VND</h6>
+                      <h6 class="text-black mb-0">{{cart.price * cart.size * cart.quantity | currency:'VND':''}}
+                        VND</h6>
                     </div>
                     <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                      <a class="text-muted btn" (click)="delete(cart.id)" style="color: red"><i class="fas fa-times"></i></a>
+                      <a class="text-muted btn" (click)="delete(cart.id)" style="color: red"><i
+                        class="fas fa-times"></i></a>
                     </div>
+                    <!--                    <div class="row">-->
+                    <!--                      <span style="color: red; padding-left: 200px">asdasdasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span>-->
+                    <!--                    </div>-->
                   </div>
                   <hr class="my-4">
                 </div>
@@ -49,9 +57,7 @@
                 <div class="p-5">
 
 
-
                   <h3 class="fw-bold mb-5 mt-2 pt-1">Thanh toán</h3>
-
 
 
                   <hr class="my-4">
@@ -68,13 +74,103 @@
 
                   <div class="d-flex justify-content-between mb-5">
                     <h5 class="text-uppercase">Tổng tiền</h5>
-                    <h5>{{totalPrice | currency:'VND':''}} VND</h5>
+                    <h5 [(ngModel)]="priceTotal">{{totalPrice | currency:'VND':''}} VND</h5>
                   </div>
 
-                  <button class="btn btn-block btn-primary my-3 py-3">Đặt hàng</button>
-                  <div id="buttonPayment"></div>
+                  <button class="btn btn-block btn-primary my-3 py-3" (click)="payment()">Đặt hàng</button>
+
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section [hidden]="!checkPayment">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12">
+        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+          <div class="card-body">
+            <div class="row">
+              <form class="needs-validation" name="frmthanhtoan" method="post"
+                    action="#">
+
+                <div class="row">
+                  <div class="col-md-4 order-md-2 mb-4">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                      <span class=" text-center">Chi tiết đơn hàng</span>
+                      <span class="badge badge-secondary badge-pill">{{carts.length}}</span>
+                    </h4>
+                    <ul class="list-group mb-3">
+                      <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let product of carts">
+                        <div>
+                          <h6 class="my-0">{{product.name}}</h6>
+                          <small class="text-muted">{{product.size}}Kg x {{product.quantity}}</small>
+                        </div>
+                        <span class="text-muted">{{product.price * product.size * product.quantity | currency:'VND':''}}</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span>Tổng thành tiền</span>
+                        <strong>{{totalPrice | currency:'VND':''}} VND</strong>
+                      </li>
+                    </ul>
+                    <div id="buttonPayment"></div>
+
+                  </div>
+                  <div class="col-md-8 order-md-1">
+                    <h4 class="mb-3 text-center">Thông tin khách hàng</h4>
+
+                    <div class="row">
+                      <div class="col-md-12 row">
+                        <label for="kh_ten" class="col-md-4">Tên khách hàng</label>
+                        <input type="text" class="form-control col-md-8" name="kh_ten" id="kh_ten"
+                               value="{{user.name}}" readonly="">
+                      </div>
+                      <div class="col-md-12 row">
+                        <label  class="col-md-4">Giới tính</label>
+                        <input type="text" class="form-control col-md-8" value="Nam"
+                               readonly="" *ngIf="user.gender==true">
+                        <input type="text" class="form-control col-md-8" value="Nữ"
+                               readonly="" *ngIf="user.gender==false">
+                      </div>
+                      <div class="col-md-12 row">
+                        <label for="kh_email" class="col-md-4">Email</label>
+                        <input type="text" class="form-control col-md-8" name="kh_email" id="kh_email"
+                               value="{{user.email}}" readonly="">
+                      </div>
+                      <div class="col-md-12 row">
+                        <label for="kh_diachi" class="col-md-4">Địa chỉ nhận hàng</label>
+                        <input type="text" class="form-control col-md-8" name="kh_diachi" id="kh_diachi"
+                               placeholder="{{user.address}}">
+                      </div>
+                      <div class="col-md-12 row">
+                        <label for="kh_dienthoai" class="col-md-4">Điện thoại</label>
+                        <input type="text" class="form-control col-md-8" name="kh_dienthoai" id="kh_dienthoai"
+                               placeholder="{{user.phoneNumber}}">
+                      </div>
+
+
+                    </div>
+                    <hr class="mb-4">
+                    <h3 (click)="setCheckPayment()" class="btn">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                           class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                      </svg>
+                      Quay lại giỏ hàng
+                    </h3>
+
+                  </div>
+
+                </div>
+
+              </form>
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@ public class OrderProduct {
     private Integer id;
 
     @ManyToOne
-    private User user;
+    private OrderDetail orderDetail;
 
     private String oderDate;
     private String shippingAddress;
@@ -26,12 +26,12 @@ public class OrderProduct {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public OrderDetail getOrderDetail() {
+        return orderDetail;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setOrderDetail(OrderDetail orderDetail) {
+        this.orderDetail = orderDetail;
     }
 
     public String getOderDate() {

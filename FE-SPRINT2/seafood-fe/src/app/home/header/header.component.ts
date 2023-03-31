@@ -25,9 +25,9 @@ export class HeaderComponent implements OnInit {
         this.role = this.tokenService.getRole()
         this.name = this.tokenService.getName()
         this.checkLogin = true
+
       }
     })
-
 
   }
 

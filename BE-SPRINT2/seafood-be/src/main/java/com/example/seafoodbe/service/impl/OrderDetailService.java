@@ -45,4 +45,9 @@ public class OrderDetailService implements IOrderDetailService {
         orderDetailRepository.deleteById(id);
     }
 
+    @Override
+    public void setFlagDelete(Integer userId) {
+        orderDetailRepository.setFlagDelete(userId);
+    }
+
 }

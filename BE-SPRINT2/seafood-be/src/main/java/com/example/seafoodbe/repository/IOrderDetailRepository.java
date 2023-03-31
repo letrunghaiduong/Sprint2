@@ -48,7 +48,16 @@ public interface IOrderDetailRepository extends JpaRepository<OrderDetail,Intege
                 @Param("productId") Integer productId,
                 @Param("size") double size);
 
+
+
     @Query(value = "select * from order_detail where product_id = :productId", nativeQuery = true)
     OrderDetail[] findByProductId(@Param("productId") Integer productId);
+
+
+    @Modifying
+    @Transactional
+    @Query(value = "update order_detail set flag_delete = true\n" +
+            "where user_id = :userId;", nativeQuery = true)
+    void setFlagDelete(@Param("userId") Integer userId);
 
 }

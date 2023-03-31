@@ -18,4 +18,7 @@ public interface IOrderDetailService {
     OrderDetail[] findByProductId(Integer productId);
 
     void delete(Integer id);
+
+    void setFlagDelete(@Param("userId") Integer userId);
+
 }
