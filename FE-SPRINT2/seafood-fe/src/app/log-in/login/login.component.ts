@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
   this.checkLogIn = true;
   const formLogin = this.signInForm.value;
   this.securityService.signIn(formLogin).subscribe(data=>{
+
     this.tokenService.setToken(data.token)
     this.tokenService.setId(data.id)
     this.tokenService.setAvatar(data.avatar)

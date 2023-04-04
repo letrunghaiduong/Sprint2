@@ -23,7 +23,7 @@ public interface IProductRepository extends JpaRepository<Product, Integer> {
             "                                                where product.flag_delete = false and\n" +
             "                                                      (product.name like concat('%', :search , '%')\n" +
             "                                                           or c.category_name like concat('%', :search , '%'))\n" +
-            "    order by product.import_date\n", nativeQuery = true,
+            "    order by product.import_date desc\n", nativeQuery = true,
     countQuery = "select product.id as id,image as image,name as name,price as price,c.category_name as category,o.origin_name as origin\n" +
             "                        from product\n" +
             "                            join category c on c.id = product.category_id\n" +
@@ -31,7 +31,7 @@ public interface IProductRepository extends JpaRepository<Product, Integer> {
             "                                                where product.flag_delete = false and\n" +
             "                                                      (product.name like concat('%', :search , '%')\n" +
             "                                                           or c.category_name like concat('%', :search , '%'))\n" +
-            "    order by product.import_date")
+            "    order by product.import_date desc;")
     Page<IProduct> showList(@Param("search") String search, Pageable pageable);
 
 

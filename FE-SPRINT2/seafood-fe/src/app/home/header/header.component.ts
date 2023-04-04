@@ -5,6 +5,7 @@ import {MessageService} from "../../service/message.service";
 import {FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 import {CartService} from "../../service/cart.service";
+import {LenghtMessageService} from "../../service/lenght-message.service";
 
 @Component({
   selector: 'app-header',
@@ -16,25 +17,32 @@ export class HeaderComponent implements OnInit {
   role: string[] = []
   name: string | null | undefined;
   length: any ;
+  search:any;
   constructor(private tokenService: TokenService,
               private messageService: MessageService,
               private router: Router,
-              private cartService: CartService) {
+              private cartService: CartService,
+              private lenghtMessage: LenghtMessageService) {
     this.messageService.currentMessage.subscribe(mes =>{
       if (this.tokenService.getToken()){
         this.role = this.tokenService.getRole()
         this.name = this.tokenService.getName()
         this.checkLogin = true
+        this.lenghtMessage.currentMessage.subscribe(data=>{
+          this.cartService.getAllCart(this.tokenService.getId()).subscribe(data=>{
+            this.length = data.length
+          })
+        })
 
       }
+
     })
+
 
   }
 
   ngOnInit(): void {
-    this.cartService.getAllCart(this.tokenService.getId()).subscribe(data=>{
-      this.length = data.length
-    })
+
   }
 
   logout() {
@@ -53,17 +61,20 @@ export class HeaderComponent implements OnInit {
         this.name = this.tokenService.getName()
         this.checkLogin = false
         this.router.navigateByUrl('/')
+        this.length = 0
         }
       })
   }
 
-  onSubmit(search: string){
+  onSubmit(search: any){
     this.messageService.changeMassege(search);
+    // this.search = ''
     this.router.navigateByUrl('/')
-    console.log(search)
   }
 
   home() {
     this.router.navigateByUrl('/')
+    window.scrollTo(0,0)
+
   }
 }

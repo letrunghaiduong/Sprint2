@@ -35,29 +35,42 @@ public interface IOrderDetailRepository extends JpaRepository<OrderDetail,Intege
     @Modifying
     @Transactional
     @Query(value = "update order_detail set quantity = quantity + :quantity\n" +
-            "where product_id = :productId and size =:size", nativeQuery = true)
+            "where product_id = :productId and size =:size and user_id = :userId", nativeQuery = true)
     void update(@Param("quantity") Integer quantity,
                 @Param("productId") Integer productId,
-                @Param("size") double size);
+                @Param("size") double size,
+                @Param("userId") Integer userId);
+
+
 
     @Modifying
     @Transactional
     @Query(value = "update order_detail set quantity = :quantity\n" +
-            "where product_id = :productId and size =:size", nativeQuery = true)
+            "            where product_id = :productId and size =:size and user_id = :userId", nativeQuery = true)
     void updateQuantity(@Param("quantity") Integer quantity,
-                @Param("productId") Integer productId,
-                @Param("size") double size);
+                        @Param("productId") Integer productId,
+                        @Param("size") double size,
+                        @Param("userId") Integer userId);
 
 
 
-    @Query(value = "select * from order_detail where product_id = :productId", nativeQuery = true)
-    OrderDetail[] findByProductId(@Param("productId") Integer productId);
+
+
+    @Query(value = "select * from order_detail where product_id = :productId and user_id = :userId", nativeQuery = true)
+    OrderDetail[] findByProductId(@Param("productId") Integer productId,
+                                  @Param("userId") Integer userId);
 
 
     @Modifying
     @Transactional
-    @Query(value = "update order_detail set flag_delete = true\n" +
-            "where user_id = :userId;", nativeQuery = true)
+    @Query(value = "update order_detail set order_detail.flag_delete = true\n" +
+            "            where order_detail.user_id = :userId", nativeQuery = true)
     void setFlagDelete(@Param("userId") Integer userId);
 
+
+    @Query(value = "select * from order_detail where product_id = :productId and user_id = :userId " +
+            "and size = :size and flag_delete = false", nativeQuery = true)
+    OrderDetail findOrderDetail(@Param("productId") Integer productId,
+                                  @Param("userId") Integer userId,
+                                  @Param("size") double size);
 }

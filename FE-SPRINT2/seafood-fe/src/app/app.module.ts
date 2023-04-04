@@ -15,7 +15,7 @@ import {GuardInterceptor} from "./security/guard.interceptor";
     BrowserModule,
     AppRoutingModule,
     HomeModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     {

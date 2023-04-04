@@ -27,6 +27,19 @@ public class SizeController {
             List<Size> imageList = sizeService.findByIdProduct(productId);
             return new ResponseEntity<>(imageList, HttpStatus.OK);
         }
+    }
+
+
+    @GetMapping("/findQuantity")
+    private ResponseEntity<?> findQuantity(@RequestParam(defaultValue = "", required = false) Integer productId,
+                                           @RequestParam(defaultValue = "", required = false) double size) {
+        if (productId == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }else {
+            Size sizes = sizeService.findQuantity(productId,size);
+            return new ResponseEntity<>(sizes, HttpStatus.OK);
+        }
 
     }
+
 }

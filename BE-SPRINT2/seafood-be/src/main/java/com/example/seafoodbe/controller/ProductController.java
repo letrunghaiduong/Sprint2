@@ -3,7 +3,9 @@ package com.example.seafoodbe.controller;
 import com.example.seafoodbe.model.IProduct;
 import com.example.seafoodbe.model.Image;
 import com.example.seafoodbe.model.Product;
+import com.example.seafoodbe.model.Size;
 import com.example.seafoodbe.service.IProductService;
+import com.example.seafoodbe.service.ISizeService;
 import com.example.seafoodbe.service.impl.ProductService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -27,12 +30,16 @@ public class ProductController {
     @Autowired
     private IProductService productService;
 
+
+    @Autowired
+    private ISizeService sizeService;
+
     @GetMapping("/list")
     private ResponseEntity<?> getAll(@RequestParam(defaultValue = "", required = false) String search,
                                      @PageableDefault(size = 4) Pageable pageable) {
         Page<IProduct> productList = productService.showList(search, pageable);
         if (productList.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ArrayList<IProduct>(), HttpStatus.OK);
         }
         return new ResponseEntity<>(productList, HttpStatus.OK);
     }
@@ -46,6 +53,8 @@ public class ProductController {
             Optional<Product> product = productService.findById(productId);
             return new ResponseEntity<>(product, HttpStatus.OK);
         }
+
+
 
     }
 

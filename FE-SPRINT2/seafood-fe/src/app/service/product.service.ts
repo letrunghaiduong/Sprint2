@@ -11,8 +11,8 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAll(search: string, size: number){
-   return  this.httpClient.get<Product[]>(this.API_PRODUCT+'/list?search='+search+'&size='+size)
+  getAll(search: any, size: any): Observable<any[]>{
+   return  this.httpClient.get<any[]>(this.API_PRODUCT+'/list?search='+search+'&size='+size)
   }
 
   findById(productId: number){

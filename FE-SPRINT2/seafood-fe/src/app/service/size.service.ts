@@ -12,4 +12,8 @@ export class SizeService {
   getAllSize(productId: number){
     return  this.httpClient.get<Size[]>(this.API_SIZE + 'list?productId='+ productId);
   }
+
+  findQuantity(productId: any,size: any){
+    return  this.httpClient.get<Size>(this.API_SIZE + 'findQuantity?productId='+ productId + '&size=' + size);
+  }
 }

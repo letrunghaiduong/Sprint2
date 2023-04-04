@@ -1,4 +1,3 @@
-
 <!-- Topbar Start -->
 <div class="container-fluid" style="background-color: skyblue">
   <div class="row align-items-center py-3 px-xl-5">
@@ -10,10 +9,10 @@
     </div>
     <div class="col-lg-5 col-8 text-left">
         <div class="justify-content-center d-flex">
-          <input style="border-radius: 30px; font-size: 25px" class="form-control m-1" #search type="search"
+          <input style="border-radius: 30px; font-size: 25px" class="form-control m-1" [(ngModel)]="search" type="search"
                  placeholder="Nhập sản phẩm..."
                  aria-label="Search">
-          <button style="border-radius: 30px; background-color: white;font-size: 25px" (click)="onSubmit(search.value)" class="btn btn-primary border m-1">
+          <button style="border-radius: 30px; background-color: white;font-size: 25px" (click)="onSubmit(search)" class="btn btn-primary border m-1">
             <i class="fa fa-search" style="border-radius: 30px; color: #D19C97"></i>
           </button>
         </div>
@@ -23,7 +22,7 @@
     <div class="col-lg-2 col-4 text-right" >
       <a href="" class="btn border rounded-pill " style="background-color: white; font-size: 25px" [routerLink]="['/cart']">
         <i class="fas fa-shopping-cart text-primary"></i>
-<!--                        <span class="badge">{{length}}</span>-->
+                        <span class="badge" *ngIf="length!=0">{{length}}</span>
       </a>
     </div>
 
@@ -62,7 +61,7 @@
               <a href="#" class="nav-item nav-link mr-3">HỆ THỐNG CỬA HÀNG</a>
               <a href="#" class="nav-item nav-link mr-3">LIÊN HỆ</a>
               <div class="nav-item dropdown" *ngIf="role[0]=='ADMIN'">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">QUẢN LÝ</a>
+                <a href="#" class="nav-link dropdown" data-toggle="dropdown">QUẢN LÝ</a>
                 <div class="dropdown-menu rounded-0 m-0"  style="background-color: #abdde5">
                   <a class="dropdown-item nav-link" [routerLink]="['/product/list']">Quản lý hàng hóa</a>
                   <a href="#" class="dropdown-item nav-link">Quản lý báo cáo</a>
@@ -73,8 +72,9 @@
             </div>
           </div>
           <div class="col-md-5 row">
-            <div class="col-md-6 navbar-nav ml-auto py-0 justify-content-center" *ngIf="checkLogin">
-              <a class="btn rounded-pill nav-link p-2 border">
+            <div class="col-md-6 navbar-nav ml-auto py-0 justify-content-center dropdown" *ngIf="checkLogin">
+              <a class="btn rounded-pill nav-link p-2 border dropdown"
+                 id="dropdownMenuLink" data-toggle="dropdown" >
                 <span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                        class="bi bi-person-circle text-primary" viewBox="0 0 16 16">
@@ -84,6 +84,10 @@
                  {{name}}
                 </span>
               </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: #abdde5">
+                <a class="dropdown-item nav-link btn" [routerLink]="['/user/profile']">Thông tin cá nhân</a>
+                <a class="dropdown-item nav-link btn">Lịch sử mua hàng</a>
+              </div>
             </div>
             <div class="col-md-6 navbar-nav ml-auto py-0 justify-content-center" *ngIf="!checkLogin">
               <a href="" class="rounded-pill nav-link p-2 border" [routerLink]="['/login']">
@@ -128,7 +132,11 @@
 <!--            Sản phẩm bán chạy-->
 <!--            <img class=" heightwidth-auto" width="20" height="20" src="https://file.hstatic.net/1000030244/file/icon-08_b334d328e22b4a65805bb434f3a1b148.png" alt="ban chay nhat">-->
 <!--          </a>-->
-          <a class="nav-item nav-link btn" (click)="onSubmit('Hải sản tươi')" style="text-align: left">
+          <a  class="nav-item nav-link btn" (click)="onSubmit('')" style="text-align: left">
+            Tất cả sản phẩm
+            <img class=" heightwidth-auto" width="20" height="20" src="https://cdn-icons-png.flaticon.com/512/5129/5129670.png" alt="">
+          </a>
+          <a class="nav-item nav-link btn"  (click)="onSubmit('Hải sản tươi')" style="text-align: left">
             Hải sản tươi sống
             <img class=" heightwidth-auto" width="20" height="20" src="https://file.hstatic.net/1000030244/file/tuoi_song_2c1a154223c740c289c5f6c708cc20be.png" alt="100 tuoi song">
           </a>

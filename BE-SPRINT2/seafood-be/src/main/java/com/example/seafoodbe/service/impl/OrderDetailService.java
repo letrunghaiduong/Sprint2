@@ -26,18 +26,18 @@ public class OrderDetailService implements IOrderDetailService {
     }
 
     @Override
-    public void update(Integer quantity, Integer productId,double size) {
-        orderDetailRepository.update(quantity, productId,size);
+    public void update(Integer quantity,Integer productId,double size,Integer userId) {
+        orderDetailRepository.update(quantity, productId, size, userId);
     }
 
     @Override
-    public void updateQuantity(Integer quantity, Integer productId, double size) {
-        orderDetailRepository.updateQuantity(quantity, productId,size);
+    public void updateQuantity(Integer quantity, Integer productId, double size, Integer userId) {
+        orderDetailRepository.updateQuantity(quantity, productId, size, userId);
     }
 
     @Override
-    public OrderDetail[] findByProductId(Integer productId) {
-        return orderDetailRepository.findByProductId(productId);
+    public OrderDetail[] findByProductId(Integer productId,Integer userId) {
+        return orderDetailRepository.findByProductId(productId,userId);
     }
 
     @Override
@@ -48,6 +48,11 @@ public class OrderDetailService implements IOrderDetailService {
     @Override
     public void setFlagDelete(Integer userId) {
         orderDetailRepository.setFlagDelete(userId);
+    }
+
+    @Override
+    public OrderDetail findOrderDetail(Integer productId, Integer userId, double size) {
+        return orderDetailRepository.findOrderDetail(productId, userId, size);
     }
 
 }

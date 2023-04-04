@@ -22,4 +22,14 @@ public class SizeService implements ISizeService {
     public List<Size> findByIdProduct(Integer productId) {
         return sizeRepository.findByIdProduct(productId);
     }
+
+    @Override
+    public void update(Integer quantity, Integer productId, double size) {
+        sizeRepository.update(quantity, productId, size);
+    }
+
+    @Override
+    public Size findQuantity(Integer productId, double size) {
+        return sizeRepository.findQuantity(productId, size);
+    }
 }

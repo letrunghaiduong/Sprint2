@@ -3,7 +3,7 @@ import {ImageService} from "../../service/image.service";
 import {SizeService} from "../../service/size.service";
 import {ProductService} from "../../service/product.service";
 import {Product} from "../../model/product";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Image} from "../../model/image";
 import {Size} from "../../model/size";
 import {TokenService} from "../../service/token.service";
@@ -12,9 +12,12 @@ import {CartService} from "../../service/cart.service";
 import {OrderDetail} from "../../model/order-detail";
 import {UserService} from "../../service/user.service";
 import {User} from "../../model/user";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {MessageService} from "../../service/message.service";
 import {render} from "creditcardpayments/creditCardPayments";
+import {LenghtMessageService} from "../../service/lenght-message.service";
+import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-detail-product',
@@ -28,18 +31,21 @@ export class DetailProductComponent implements OnInit {
 
   imageList: Image[] = []
   sizeList: Size[] = []
-  id: number = 0
+  id = 0
   product: Product = {}
+  size:any = {}
 
   form: FormGroup;
-  quantity = 0;
+  quantity: any;
 
   constructor(private imageService: ImageService,
               private sizeService: SizeService,
               private productService: ProductService,
               private activatedRoute: ActivatedRoute,
               private tokenService: TokenService,
-              private cartService: CartService) {
+              private cartService: CartService,
+              private router:Router,
+              private lenghtMessage: LenghtMessageService) {
     this.activatedRoute.paramMap.subscribe(next => {
       // @ts-ignore
       this.id = +next.get('id');
@@ -48,15 +54,15 @@ export class DetailProductComponent implements OnInit {
       this.getSize(this.id)
     });
     this.form = new FormGroup({
-      size: new FormControl('',Validators.required),
-      quantity: new FormControl('',Validators.required),
+      size: new FormControl('',[Validators.required]),
+      quantity: new FormControl('',[Validators.required,Validators.min(1)]),
     });
-
   }
 
   ngOnInit(): void {
     window.scrollTo(1900, 660)
   }
+
 
   getProduct(productId: number) {
     this.productService.findById(productId).subscribe(data => {
@@ -84,22 +90,52 @@ export class DetailProductComponent implements OnInit {
 
   calculatePrice() {
     // @ts-ignore
-    this.totalPrice = this.selectedSize * this.price;
+    this.totalPrice = this.selectedSize * this.price * this.quantity;
 
   }
 
 
   addToCart() {
-    const size = this.form.value.size;
-    const quantity = this.form.value.quantity;
-    this.cartService.addToCart(this.product.id, this.tokenService.getId(),quantity,size).subscribe(data => {
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Đã thêm vào giỏ hàng!',
-        showConfirmButton: false,
-        timer: 3000
-      });
-    })
+    if (this.form.valid){
+      const size = this.form.value.size;
+      const quantity = this.form.value.quantity;
+      this.cartService.addToCart(this.product.id, this.tokenService.getId(),quantity,size).subscribe(data => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Đã thêm vào giỏ hàng!',
+          showConfirmButton: false,
+          timer: 3000
+        });
+        this.cartService.getAllCart(this.tokenService.getId()).subscribe(data=>{
+          this.lenghtMessage.changeMassege(data.length);
+        })
+      },error => {
+        if (error.error==='errorQuantity'){
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Số lượng trong kho không đủ!',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        }else if (error.error ==='errorLogin') {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Bạn phải đăng nhập để tiếp tục!',
+            showCancelButton: true,
+            cancelButtonText: 'Hủy',
+            confirmButtonText: 'Đăng nhập',
+            timer: 3000
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigateByUrl('/login')
+            }
+          })
+        }
+      })
+    }
+
   }
 }

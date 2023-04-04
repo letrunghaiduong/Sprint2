@@ -20,4 +20,18 @@ public interface ISizeRepository extends JpaRepository<Size, Integer> {
 
     @Query(value = "select * from size where product_id = :productId", nativeQuery = true)
     List<Size> findByIdProduct(@Param("productId") Integer productId);
+
+
+    @Modifying
+    @Transactional
+    @Query(value = "update size set size.quantity = size.quantity - :quantity\n" +
+            "            where size.product_id = :productId\n" +
+            "                  and size.size = :size", nativeQuery = true)
+    void update(@Param("quantity") Integer quantity,
+                @Param("productId") Integer productId,
+                @Param("size") double size);
+
+    @Query(value = "select * from size where product_id = :productId and size.size = :size", nativeQuery = true)
+    Size findQuantity(@Param("productId") Integer productId,
+                            @Param("size") double size);
 }

@@ -8,10 +8,8 @@ export class OrderService {
   API_ORDER = 'http://localhost:8080/api/orderProduct'
   constructor(private httpClient: HttpClient) { }
 
-  order(shippingAddress: any,totalPrice: any, orderDetailId: any, userId: any){
-    // return this.httpClient.get(this.API_ORDER + 'add?oderDate=' + oderDate + '&shippingAddress='+ shippingAddress +
-    // '&totalPrice=' + totalPrice + '&orderDetailId'+ orderDetailId + '&userId=' + userId)
+  order(shippingAddress: any,totalPrice: any, orderDetailId: any,productId: any, size: any, quantity: any){
     return this.httpClient.post(this.API_ORDER + '/add', {shippingAddress: shippingAddress,
-      totalPrice: totalPrice, orderDetailId: orderDetailId ,userId: userId})
+      totalPrice: totalPrice, orderDetailId: orderDetailId, productId: productId,size: size, quantity: quantity})
   }
 }

@@ -16,16 +16,22 @@ export class CartService {
   }
 
   addToCart(productId: any, userId: any, quantity: any,size: any): Observable<OrderDetail>{
-    return this.httpClient.get(this.API_CART + '/add?productId=' + productId +
-      '&userId=' + userId+'&size='+size + '&quantity=' + quantity)
+    return this.httpClient.post(this.API_CART + '/add',{productId: productId, userId: userId, quantity: quantity, size: size})
   }
 
-  update(quantity: any, productId: any, size: any): Observable<OrderDetail>{
-    return this.httpClient.get(this.API_CART + '/update?quantity=' + quantity + '&productId=' + productId +
-     '&size='+size )
+  update(quantity: any, productId: any, userId: any,size:any): Observable<OrderDetail>{
+    return this.httpClient.put(this.API_CART + '/update', {productId: productId, userId: userId, quantity: quantity, size: size})
+  }
+
+  inputQuantity(quantity: any, productId: any, userId: any,size:any): Observable<OrderDetail>{
+    return this.httpClient.put(this.API_CART + '/inputQuantity',{productId: productId, userId: userId, quantity: quantity, size: size})
   }
 
   delete(id: any): Observable<OrderDetail>{
     return this.httpClient.delete(this.API_CART + '/delete?id=' + id  )
+  }
+
+  setFlagDelete(userId: any): Observable<OrderDetail>{
+    return this.httpClient.get(this.API_CART + '/setFlagDelete?userId=' + userId)
   }
 }

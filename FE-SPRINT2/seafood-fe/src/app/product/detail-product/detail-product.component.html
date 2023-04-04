@@ -1,16 +1,16 @@
-<div class="container" >
+<div class="container">
   <div class="card" style="border-radius: 20px;">
-    <div class="container-fliud" >
-      <div class="wrapper row" >
-        <div class="preview col-md-6" >
+    <div class="container-fliud">
+      <div class="wrapper row">
+        <div class="preview col-md-6">
 
           <div class="preview-pic tab-content" style="width: 100%; height: 300px;border-radius: 15px">
-<!--            <div class="tab-pane active" id="{{imageList[0].id}}">-->
-<!--              <img style="width: 100%; height: 450px" src="{{imageList[0].image}}"/>-->
-<!--            </div>-->
-<!--            <div class="tab-pane" id="{{item.image}}" *ngFor="let item of imageList.slice(1)">-->
-<!--              <img style="width: 100%; height: 450px" src="{{item.image}}"/>-->
-<!--            </div>-->
+            <!--            <div class="tab-pane active" id="{{imageList[0].id}}">-->
+            <!--              <img style="width: 100%; height: 450px" src="{{imageList[0].image}}"/>-->
+            <!--            </div>-->
+            <!--            <div class="tab-pane" id="{{item.image}}" *ngFor="let item of imageList.slice(1)">-->
+            <!--              <img style="width: 100%; height: 450px" src="{{item.image}}"/>-->
+            <!--            </div>-->
             <div class="tab-pane active" id="pic-1">
               <img style="width: 500px; height: 450px" src="{{imageList[0].image}}"/>
             </div>
@@ -27,17 +27,17 @@
               <img style="width: 500px; height: 450px" src="{{imageList[4].image}}"/>
             </div>
           </div>
-          <ul class="preview-thumbnail nav nav-tabs" >
-<!--            <li class="active">-->
-<!--              <a data-target="{{'#'+imageList[0].id}}" data-toggle="tab">-->
-<!--                <img style="width: 100%; height: 100%" src="{{imageList[0].image}}"/>-->
-<!--              </a>-->
-<!--            </li>-->
-<!--            <li  *ngFor="let item of imageList.slice(1)">-->
-<!--              <a data-target="{{'#'+item.id}}" data-toggle="tab">-->
-<!--                <img style="width: 100%; height: 100%" src="{{item.image}}"/>-->
-<!--              </a>-->
-<!--            </li>-->
+          <ul class="preview-thumbnail nav nav-tabs">
+            <!--            <li class="active">-->
+            <!--              <a data-target="{{'#'+imageList[0].id}}" data-toggle="tab">-->
+            <!--                <img style="width: 100%; height: 100%" src="{{imageList[0].image}}"/>-->
+            <!--              </a>-->
+            <!--            </li>-->
+            <!--            <li  *ngFor="let item of imageList.slice(1)">-->
+            <!--              <a data-target="{{'#'+item.id}}" data-toggle="tab">-->
+            <!--                <img style="width: 100%; height: 100%" src="{{item.image}}"/>-->
+            <!--              </a>-->
+            <!--            </li>-->
             <li class="active">
               <a data-target="#pic-1" data-toggle="tab">
                 <img style="width: 100%; height: 100%" src="{{imageList[0].image}}"/>
@@ -78,7 +78,6 @@
             </div>
             <span class="review-no">41 reviews</span>
           </div>
-<!--          <h4>{{product.category}}</h4>-->
           <h5>Đơn giá: {{product.price| currency:'VND':''}}<span style="font-size: 13px">/Kg</span></h5>
 
           <span style="font-size:15px">⚡ Giao Nhanh 2H</span>
@@ -86,29 +85,43 @@
           <p><span style="font-size:16px">🔥 Gọi Ngay Hotline 📞0906789543📞 Để Được Tư Vấn Và Mua Hàng</span></p>
           <p>🎁 Miễn phí giao hàng T4 &amp; T5 hàng tuần</p>
 
-<!--          <h5>Xuất Xứ : {{product.origin?.originName}}</h5>-->
           <form [formGroup]="form">
-          <select formControlName="size" class="form-control-sm price" style="width: 45% " [(ngModel)]="selectedSize" (change)="calculatePrice()">
-            <option [value]="0" selected>Chọn size</option>
-            <option [value]="size.size" *ngFor="let size of sizeList" >{{size.size}} Kg</option>
-          </select>
+            <select formControlName="size" class="form-control-sm price" style="width: 45% " [(ngModel)]="selectedSize"
+                    (change)="calculatePrice()">
+              <option [value]="0" selected>Chọn size</option>
+              <option [value]="size.size" *ngFor="let size of sizeList">{{size.size}} Kg</option>
+            </select>
             <div class="form-control-feedback" style="color: red"
                  *ngIf="form.controls.size.hasError('required') && form.controls.size.touched">
-              Bản phải chọn kích thước
+              Chọn kích thước
             </div>
 
-          <input class="form-control-sm" style="width: 45% ; margin-left: 20px" formControlName="quantity" type="number" placeholder="Số lượng">
+            <input class="form-control-sm" style="width: 45% ; margin-left: 20px"
+                   [(ngModel)]="quantity" (input)="calculatePrice()" formControlName="quantity" type="number" placeholder="Số lượng">
+
+            <div class="form-control-feedback" style="color: red; margin-left: 50%"
+                 *ngIf="form.controls.quantity.hasError('required') && form.controls.quantity.touched">
+              Chọn số lượng
+            </div>
+            <div class="form-control-feedback" style="color: red; margin-left: 50%"
+                 *ngIf="form.controls.quantity.hasError('min') && form.controls.quantity.touched">
+              Số lượng phải lớn hơn 0
+            </div>
+            <div class="form-control-feedback" style="color: red; margin-left: 50%"
+                 *ngIf="form.controls.quantity.hasError('insufficientStock') && form.controls.quantity.touched">
+              Kho không đủ
+            </div>
           </form>
           <br>
 
-          <h5 class="price">giá tiền: <span *ngIf="selectedSize != 0" >{{totalPrice| currency:'VND':''}} VND</span></h5>
+          <h5 class="price">giá tiền: <span *ngIf="form.valid">{{totalPrice| currency:'VND':''}} VND</span></h5>
 
           <br>
           <div class="action">
             <div class="col-12 text-left">
               <a class="btn border rounded-pill " (click)="addToCart()"
                  style="background-color: white; font-size: 25px">
-                <i class="fas fa-shopping-cart text-primary">  </i>  Thêm vào giỏ hàng
+                <i class="fas fa-shopping-cart text-primary"> </i> Thêm vào giỏ hàng
               </a>
             </div>
           </div>

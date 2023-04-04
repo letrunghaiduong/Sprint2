@@ -3,6 +3,7 @@ package com.example.seafoodbe.controller;
 import com.example.seafoodbe.dto.Order;
 import com.example.seafoodbe.service.IOrderDetailService;
 import com.example.seafoodbe.service.IOrderProductService;
+import com.example.seafoodbe.service.ISizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class OrderProductController {
     private IOrderProductService orderProductService;
 
     @Autowired
-    private IOrderDetailService orderDetailService;
+    private ISizeService sizeService;
 
     @PostMapping("/add")
     private ResponseEntity<?> addCart(@RequestBody Order order) {
@@ -30,9 +31,7 @@ public class OrderProductController {
         String formattedDateTime = currentDateTime.format(formatter);
 
         orderProductService.addOrder(formattedDateTime,order.getShippingAddress(),order.getTotalPrice(),order.getOrderDetailId());
-
-        orderDetailService.setFlagDelete(order.getUserId());
-
+        sizeService.update(order.getQuantity(),order.getProductId(),order.getSize());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

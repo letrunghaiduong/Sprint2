@@ -1,4 +1,4 @@
-<section>
+<section [hidden]="checkPayment">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12">
@@ -6,14 +6,18 @@
           <div class="card-body p-0">
             <div class="row g-0">
               <div class="col-lg-8">
+
                 <div class="p-5">
                   <div class="d-flex justify-content-between align-items-center mb-5">
                     <h1 class="fw-bold mb-0 text-black">Giỏ hàng</h1>
-                    <h6 class="mb-0 text-muted">{{carts.length}} items</h6>
+                    <h6 class="mb-0 text-muted">{{carts.length}} sản phẩm</h6>
                   </div>
 
                   <hr class="my-4">
-                  <div class="row mb-4 d-flex justify-content-between align-items-center" *ngFor="let cart of carts">
+                  <div class="row mb-4 d-flex justify-content-between align-items-center" *ngIf="carts.length== 0">
+                    <img src="https://bizweb.dktcdn.net/100/320/202/themes/714916/assets/empty-cart.png?1650292912948" alt="">
+                  </div>
+                  <div class="row mb-4 d-flex justify-content-between align-items-center" *ngFor="let cart of carts" >
                     <hr>
 
                     <div class="col-md-2 col-lg-2 col-xl-2">
@@ -30,8 +34,9 @@
                         <i class="fas fa-minus"></i>
                       </button>
 
-                      <input id="form1" min="0" name="quantity" [value]="cart.quantity"
-                             class="form-control form-control-sm" style="width: 50px"/>
+                      <input #quantity type="number" id="form1" min="0" name="quantity" (focusout)="inputQuantity(quantity.value,cart.productId,cart.size)"
+                             [value]="cart.quantity" class="form-control form-control-sm no-spinners" style="width: 50px"/>
+
 
                       <button class="btn btn-link px-2" (click)="updateQuantity(cart.productId,cart.size,1)">
                         <i class="fas fa-plus"></i>
@@ -74,10 +79,10 @@
 
                   <div class="d-flex justify-content-between mb-5">
                     <h5 class="text-uppercase">Tổng tiền</h5>
-                    <h5 [(ngModel)]="priceTotal">{{totalPrice | currency:'VND':''}} VND</h5>
+                    <h5 >{{totalPrice | currency:'VND':''}} VND</h5>
                   </div>
 
-                  <button class="btn btn-block btn-primary my-3 py-3" (click)="payment()">Đặt hàng</button>
+                  <button class="btn btn-block btn-primary my-3 py-3" (click)="payment()" *ngIf="carts.length!=0">Đặt hàng</button>
 
                 </div>
               </div>
