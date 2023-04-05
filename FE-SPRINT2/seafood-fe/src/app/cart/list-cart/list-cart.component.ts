@@ -73,10 +73,13 @@ export class ListCartComponent implements OnInit {
   }
 
   buy() {
+    const number = Math.floor(Math.random()*1000000000);
+    const code ='MDH-' + number;
+
     for (let i = 0; i < this.carts.length; i++) {
       this.orderService.order(this.user.address,
         this.carts[i].size * this.carts[i].quantity * this.carts[i].price, this.carts[i].id,
-        this.carts[i].productId, this.carts[i].size, this.carts[i].quantity).subscribe(data => {
+        this.carts[i].productId, this.carts[i].size, this.carts[i].quantity, code).subscribe(data => {
       })
     }
     this.cartService.setFlagDelete(this.user.id).subscribe()

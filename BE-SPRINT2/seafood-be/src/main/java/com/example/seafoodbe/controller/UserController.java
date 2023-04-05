@@ -1,8 +1,7 @@
 package com.example.seafoodbe.controller;
 
-import com.example.seafoodbe.model.IProduct;
+
 import com.example.seafoodbe.model.User;
-import com.example.seafoodbe.repository.IUserRepository;
 import com.example.seafoodbe.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

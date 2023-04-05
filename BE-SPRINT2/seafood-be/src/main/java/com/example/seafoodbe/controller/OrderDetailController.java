@@ -75,7 +75,6 @@ public class OrderDetailController {
             orderDetailService.update(orderDetailDto.getQuantity(), orderDetailDto.getProductId(), orderDetailDto.getSize(), orderDetailDto.getUserId());
             return new ResponseEntity<>(HttpStatus.OK);
         }
-
     }
 
 
@@ -98,7 +97,6 @@ public class OrderDetailController {
         orderDetailService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
     @GetMapping("/setFlagDelete")
     private ResponseEntity<?> setFlagDelete(@RequestParam(defaultValue = "", required = false) Integer userId) {
         orderDetailService.setFlagDelete(userId);

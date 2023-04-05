@@ -72,9 +72,9 @@
             </div>
           </div>
           <div class="col-md-5 row">
-            <div class="col-md-6 navbar-nav ml-auto py-0 justify-content-center dropdown" *ngIf="checkLogin">
-              <a class="btn rounded-pill nav-link p-2 border dropdown"
-                 id="dropdownMenuLink" data-toggle="dropdown" >
+            <div class="col-md-6 navbar-nav ml-auto py-0 justify-content-center" *ngIf="checkLogin">
+              <a class="btn rounded-pill nav-link p-2 border " [routerLink]="['/user/profile']"
+                 id="dropdownMenuLink" >
                 <span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                        class="bi bi-person-circle text-primary" viewBox="0 0 16 16">
@@ -84,10 +84,6 @@
                  {{name}}
                 </span>
               </a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: #abdde5">
-                <a class="dropdown-item nav-link btn" [routerLink]="['/user/profile']">Thông tin cá nhân</a>
-                <a class="dropdown-item nav-link btn">Lịch sử mua hàng</a>
-              </div>
             </div>
             <div class="col-md-6 navbar-nav ml-auto py-0 justify-content-center" *ngIf="!checkLogin">
               <a href="" class="rounded-pill nav-link p-2 border" [routerLink]="['/login']">

@@ -2,8 +2,9 @@ import {User} from "./user";
 
 export interface OrderProduct {
   id?: number
-  oderDate?: string
+  orderDate?: string
   shippingAddress?: string
+  code?: string
   user?: User
   totalPrice: number
 }

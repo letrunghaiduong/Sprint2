@@ -13,9 +13,18 @@ public class OrderProduct {
 
     private String oderDate;
     private String shippingAddress;
+    private String code;
     private double totalPrice;
 
     public OrderProduct() {
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Integer getId() {

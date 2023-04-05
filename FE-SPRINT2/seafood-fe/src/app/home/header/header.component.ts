@@ -68,7 +68,7 @@ export class HeaderComponent implements OnInit {
 
   onSubmit(search: any){
     this.messageService.changeMassege(search);
-    // this.search = ''
+    this.search = ''
     this.router.navigateByUrl('/')
   }
 

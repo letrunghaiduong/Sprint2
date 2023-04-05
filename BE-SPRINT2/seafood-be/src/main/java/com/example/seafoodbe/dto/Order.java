@@ -2,6 +2,7 @@ package com.example.seafoodbe.dto;
 
 public class Order {
     private  String shippingAddress;
+    private  String code;
     private  double totalPrice;
     private  Integer orderDetailId;
     private  Integer productId;
@@ -9,6 +10,14 @@ public class Order {
     private  double size;
 
     public Order() {
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Integer getProductId() {
