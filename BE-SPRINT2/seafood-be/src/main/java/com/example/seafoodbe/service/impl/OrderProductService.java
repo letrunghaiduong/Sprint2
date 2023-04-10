@@ -17,8 +17,8 @@ public class OrderProductService implements IOrderProductService {
     IOrderProductRepository orderProductRepository;
 
     @Override
-    public void addOrder(String oderDate, String shippingAddress, double totalPrice, Integer orderDetailId,String maDonHang) {
-        orderProductRepository.addOrder(oderDate, shippingAddress, totalPrice, orderDetailId,maDonHang);
+    public void addOrder(String oderDate, String shippingAddress, double totalPrice, Integer orderDetailId,String code) {
+        orderProductRepository.addOrder(oderDate, shippingAddress, totalPrice, orderDetailId,code);
     }
 
     @Override

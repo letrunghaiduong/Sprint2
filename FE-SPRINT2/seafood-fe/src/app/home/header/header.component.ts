@@ -1,8 +1,7 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {TokenService} from "../../service/token.service";
 import Swal from "sweetalert2";
 import {MessageService} from "../../service/message.service";
-import {FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 import {CartService} from "../../service/cart.service";
 import {LenghtMessageService} from "../../service/lenght-message.service";
@@ -16,6 +15,7 @@ export class HeaderComponent implements OnInit {
   checkLogin = false
   role: string[] = []
   name: string | null | undefined;
+  image: any;
   length: any ;
   search:any;
   constructor(private tokenService: TokenService,
@@ -27,23 +27,22 @@ export class HeaderComponent implements OnInit {
       if (this.tokenService.getToken()){
         this.role = this.tokenService.getRole()
         this.name = this.tokenService.getName()
+        this.image = this.tokenService.getAvatar()
         this.checkLogin = true
         this.lenghtMessage.currentMessage.subscribe(data=>{
           this.cartService.getAllCart(this.tokenService.getId()).subscribe(data=>{
             this.length = data.length
           })
         })
-
       }
-
     })
-
-
   }
+
 
   ngOnInit(): void {
 
   }
+
 
   logout() {
     Swal.fire({
@@ -66,11 +65,13 @@ export class HeaderComponent implements OnInit {
       })
   }
 
+
   onSubmit(search: any){
     this.messageService.changeMassege(search);
     this.search = ''
     this.router.navigateByUrl('/')
   }
+
 
   home() {
     this.router.navigateByUrl('/')

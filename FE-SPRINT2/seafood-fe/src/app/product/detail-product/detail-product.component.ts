@@ -18,6 +18,7 @@ import {render} from "creditcardpayments/creditCardPayments";
 import {LenghtMessageService} from "../../service/lenght-message.service";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-detail-product',
@@ -45,7 +46,8 @@ export class DetailProductComponent implements OnInit {
               private tokenService: TokenService,
               private cartService: CartService,
               private router:Router,
-              private lenghtMessage: LenghtMessageService) {
+              private lenghtMessage: LenghtMessageService,
+              private title: Title) {
     this.activatedRoute.paramMap.subscribe(next => {
       // @ts-ignore
       this.id = +next.get('id');
@@ -61,6 +63,7 @@ export class DetailProductComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(1900, 660)
+    this.title.setTitle('Xem chi tiết')
   }
 
 
@@ -114,15 +117,23 @@ export class DetailProductComponent implements OnInit {
         if (error.error==='errorQuantity'){
           Swal.fire({
             position: 'center',
-            icon: 'error',
+            icon: 'warning',
             title: 'Số lượng trong kho không đủ!',
             showConfirmButton: false,
             timer: 3000
           });
+        }else if (error.error ==='errorSize') {
+          Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: 'Bạn chưa chọn kích thước!',
+            showConfirmButton: false,
+            timer: 3000
+          })
         }else if (error.error ==='errorLogin') {
           Swal.fire({
             position: 'center',
-            icon: 'error',
+            icon: 'warning',
             title: 'Bạn phải đăng nhập để tiếp tục!',
             showCancelButton: true,
             cancelButtonText: 'Hủy',
@@ -136,6 +147,5 @@ export class DetailProductComponent implements OnInit {
         }
       })
     }
-
   }
 }

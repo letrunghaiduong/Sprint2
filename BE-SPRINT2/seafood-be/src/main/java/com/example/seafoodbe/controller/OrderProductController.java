@@ -31,7 +31,9 @@ public class OrderProductController {
 
     @PostMapping("/add")
     private ResponseEntity<?> addCart(@RequestBody Order order) {
-
+        if (order.getShippingAddress() == null){
+            return new ResponseEntity<>("errorAddress",HttpStatus.BAD_REQUEST);
+        }
         LocalDateTime currentDateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDateTime = currentDateTime.format(formatter);

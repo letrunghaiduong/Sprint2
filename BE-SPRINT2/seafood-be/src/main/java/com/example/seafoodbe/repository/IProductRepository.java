@@ -1,6 +1,7 @@
 package com.example.seafoodbe.repository;
 
 import com.example.seafoodbe.model.IProduct;
+import com.example.seafoodbe.model.ISellingProducts;
 import com.example.seafoodbe.model.Image;
 import com.example.seafoodbe.model.Product;
 import org.springframework.data.domain.Page;
@@ -53,5 +54,21 @@ public interface IProductRepository extends JpaRepository<Product, Integer> {
     IProduct findByIdProduct(@Param("productId") Integer productId);
 
     Optional<Product> findById(Integer id);
+
+
+    @Query(value = "SELECT product.id, product.name as name, SUM(od.quantity) AS totalQuantity,\n" +
+            "       product.image as image, product.price as price\n" +
+            "FROM product\n" +
+            "         JOIN order_detail od on product.id = od.product_id\n" +
+            "GROUP BY product.id, product.name\n" +
+            "order by totalQuantity desc",
+            nativeQuery = true,
+    countQuery = "SELECT product.id, product.name as name, SUM(od.quantity) AS totalQuantity,\n" +
+            "       product.image as image, product.price as price\n" +
+            "FROM product\n" +
+            "         JOIN order_detail od on product.id = od.product_id\n" +
+            "GROUP BY product.id, product.name\n" +
+            "order by totalQuantity desc")
+    Page<ISellingProducts> sellingProducts(Pageable pageable);
 
 }

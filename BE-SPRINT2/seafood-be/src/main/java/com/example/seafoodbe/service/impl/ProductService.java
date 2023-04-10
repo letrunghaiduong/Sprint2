@@ -1,6 +1,7 @@
 package com.example.seafoodbe.service.impl;
 
 import com.example.seafoodbe.model.IProduct;
+import com.example.seafoodbe.model.ISellingProducts;
 import com.example.seafoodbe.model.Product;
 import com.example.seafoodbe.repository.IProductRepository;
 import com.example.seafoodbe.service.IProductService;
@@ -36,5 +37,15 @@ public class ProductService implements IProductService {
     @Override
     public Optional<Product> findById(Integer id) {
         return productRepository.findById(id);
+    }
+
+    @Override
+    public Page<ISellingProducts> sellingProducts(Pageable pageable) {
+        return productRepository.sellingProducts(pageable);
+    }
+
+    @Override
+    public Page<Product> getAll(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 }

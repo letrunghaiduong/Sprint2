@@ -38,40 +38,42 @@ public class OrderDetailController {
 
     @PostMapping("/add")
     private ResponseEntity<?> addCart(@RequestBody OrderDetailDto orderDetailDto) {
+        if (orderDetailDto.getUserId() == null) {
+            return new ResponseEntity<>("errorLogin", HttpStatus.BAD_REQUEST);
+        } else if (orderDetailDto.getSize() == 0) {
+            return new ResponseEntity<>("errorSize", HttpStatus.BAD_REQUEST);
+        }
         OrderDetail[] orderDetails = orderDetailService.findByProductId(orderDetailDto.getProductId(), orderDetailDto.getUserId());
-        Size size = sizeService.findQuantity(orderDetailDto.getProductId(),orderDetailDto.getSize());
-            if (orderDetailDto.getUserId()==null){
-                return new ResponseEntity<>("errorLogin",HttpStatus.BAD_REQUEST);
-            }
-            if (orderDetails.length == 0) {
-                if (orderDetailDto.getQuantity() > size.getQuantity()){
-                    return new ResponseEntity<>("errorQuantity",HttpStatus.BAD_REQUEST);
-                }
-                orderDetailService.addNew(orderDetailDto.getProductId(), orderDetailDto.getUserId(), orderDetailDto.getQuantity(), orderDetailDto.getSize());
-                return new ResponseEntity<>(HttpStatus.OK);
-            } else {
-                for (int i = 0; i < orderDetails.length; i++) {
-                    if (orderDetails[i].getSize() == orderDetailDto.getSize() && !orderDetails[i].isFlagDelete()) {
-                        if ((orderDetailDto.getQuantity() +orderDetails[i].getQuantity()) > size.getQuantity()){
-                            return new ResponseEntity<>("errorQuantity",HttpStatus.BAD_REQUEST);
-                        }
-                        orderDetailService.update(orderDetailDto.getQuantity(), orderDetailDto.getProductId(), orderDetailDto.getSize(), orderDetailDto.getUserId());
-                        return new ResponseEntity<>(HttpStatus.OK);
+        Size size = sizeService.findQuantity(orderDetailDto.getProductId(), orderDetailDto.getSize());
+        if (orderDetailDto.getQuantity() > size.getQuantity()) {
+            return new ResponseEntity<>("errorQuantity", HttpStatus.BAD_REQUEST);
+        }
+        if (orderDetails.length == 0) {
+            orderDetailService.addNew(orderDetailDto.getProductId(), orderDetailDto.getUserId(), orderDetailDto.getQuantity(), orderDetailDto.getSize());
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            for (int i = 0; i < orderDetails.length; i++) {
+                if (orderDetails[i].getSize() == orderDetailDto.getSize() && !orderDetails[i].isFlagDelete()) {
+                    if ((orderDetailDto.getQuantity() + orderDetails[i].getQuantity()) > size.getQuantity()) {
+                        return new ResponseEntity<>("errorQuantity", HttpStatus.BAD_REQUEST);
                     }
+                    orderDetailService.update(orderDetailDto.getQuantity(), orderDetailDto.getProductId(), orderDetailDto.getSize(), orderDetailDto.getUserId());
+                    return new ResponseEntity<>(HttpStatus.OK);
                 }
-                orderDetailService.addNew(orderDetailDto.getProductId(), orderDetailDto.getUserId(), orderDetailDto.getQuantity(), orderDetailDto.getSize());
-                return new ResponseEntity<>(HttpStatus.OK);
             }
+            orderDetailService.addNew(orderDetailDto.getProductId(), orderDetailDto.getUserId(), orderDetailDto.getQuantity(), orderDetailDto.getSize());
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
 
     }
 
     @PutMapping("/update")
     private ResponseEntity<?> update(@RequestBody OrderDetailDto orderDetailDto) {
-        Size size = sizeService.findQuantity(orderDetailDto.getProductId(),orderDetailDto.getSize());
-        OrderDetail orderDetail = orderDetailService.findOrderDetail(orderDetailDto.getProductId(),orderDetailDto.getUserId(),orderDetailDto.getSize());
-        if (orderDetailDto.getQuantity() + orderDetail.getQuantity() > size.getQuantity()){
-            return new ResponseEntity<>("errorQuantity",HttpStatus.BAD_REQUEST);
-        }else {
+        Size size = sizeService.findQuantity(orderDetailDto.getProductId(), orderDetailDto.getSize());
+        OrderDetail orderDetail = orderDetailService.findOrderDetail(orderDetailDto.getProductId(), orderDetailDto.getUserId(), orderDetailDto.getSize());
+        if (orderDetailDto.getQuantity() + orderDetail.getQuantity() > size.getQuantity()) {
+            return new ResponseEntity<>("errorQuantity", HttpStatus.BAD_REQUEST);
+        } else {
             orderDetailService.update(orderDetailDto.getQuantity(), orderDetailDto.getProductId(), orderDetailDto.getSize(), orderDetailDto.getUserId());
             return new ResponseEntity<>(HttpStatus.OK);
         }
@@ -80,11 +82,11 @@ public class OrderDetailController {
 
     @PutMapping("/inputQuantity")
     private ResponseEntity<?> inputQuantity(@RequestBody OrderDetailDto orderDetailDto) {
-        Size size = sizeService.findQuantity(orderDetailDto.getProductId(),orderDetailDto.getSize());
-        if (orderDetailDto.getQuantity() > size.getQuantity()){
-            return new ResponseEntity<>("errorMaxQuantity",HttpStatus.BAD_REQUEST);
-        }else if (orderDetailDto.getQuantity() < 1){
-            return new ResponseEntity<>("errorMinQuantity",HttpStatus.BAD_REQUEST);
+        Size size = sizeService.findQuantity(orderDetailDto.getProductId(), orderDetailDto.getSize());
+        if (orderDetailDto.getQuantity() > size.getQuantity()) {
+            return new ResponseEntity<>("errorMaxQuantity", HttpStatus.BAD_REQUEST);
+        } else if (orderDetailDto.getQuantity() < 1) {
+            return new ResponseEntity<>("errorMinQuantity", HttpStatus.BAD_REQUEST);
         } else {
             orderDetailService.updateQuantity(orderDetailDto.getQuantity(), orderDetailDto.getProductId(), orderDetailDto.getSize(), orderDetailDto.getUserId());
             return new ResponseEntity<>(HttpStatus.OK);
@@ -97,6 +99,7 @@ public class OrderDetailController {
         orderDetailService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @GetMapping("/setFlagDelete")
     private ResponseEntity<?> setFlagDelete(@RequestParam(defaultValue = "", required = false) Integer userId) {
         orderDetailService.setFlagDelete(userId);

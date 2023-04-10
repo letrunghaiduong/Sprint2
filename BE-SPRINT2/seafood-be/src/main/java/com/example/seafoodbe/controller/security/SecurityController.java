@@ -21,14 +21,9 @@ import javax.validation.Valid;
 @RequestMapping("api/public")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class SecurityController {
-    @Autowired
-    private IUserService userService;
 
     @Autowired
     private JwtProvider jwtProvider;
-
-    @Autowired
-    private JwtTokenFilter jwtTokenFilter;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -39,6 +34,7 @@ public class SecurityController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(signInForm.getUserName(), signInForm.getPassword())
         );
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = jwtProvider.createToken(authentication);

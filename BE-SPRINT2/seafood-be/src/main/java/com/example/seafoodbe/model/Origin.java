@@ -29,12 +29,12 @@ public class Origin {
         this.id = id;
     }
 
-    public String getOrigin() {
+    public String getOriginName() {
         return originName;
     }
 
-    public void setOrigin(String origin) {
-        this.originName = origin;
+    public void setOriginName(String originName) {
+        this.originName = originName;
     }
 
     public List<Product> getProductList() {

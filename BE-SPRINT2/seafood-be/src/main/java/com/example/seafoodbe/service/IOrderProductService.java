@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface IOrderProductService {
-    void addOrder(String oderDate,String shippingAddress,double totalPrice,Integer orderDetailId,String maDonHang);
+    void addOrder(String oderDate,String shippingAddress,double totalPrice,Integer orderDetailId,String code);
 
     List<IPurchaseHistory> detailPurchase(String code);
 

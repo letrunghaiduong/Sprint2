@@ -5,6 +5,9 @@ import {User} from "../../model/user";
 import {OrderService} from "../../service/order.service";
 import {OrderProduct} from "../../model/order-product";
 import {Purchase} from "../../model/purchase";
+import {FormControl, FormGroup} from "@angular/forms";
+import {LenghtMessageService} from "../../service/lenght-message.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-profile-user',
@@ -18,25 +21,41 @@ export class ProfileUserComponent implements OnInit {
 
   orderList: OrderProduct[] = []
   detailList: Purchase[] = []
-
+  orderPage: any;
 
   user: User = {}
+  formUpdate: FormGroup = new FormGroup({
+    id: new FormControl(),
+    name: new FormControl(),
+    avatar: new FormControl(),
+    userName: new FormControl(),
+    password: new FormControl(),
+    phoneNumber: new FormControl(),
+    email: new FormControl(),
+    address: new FormControl(),
+    dateOfBirth: new FormControl(),
+    gender: new FormControl(),
+  });
+
   constructor(private tokenService: TokenService,
               private userService: UserService,
-              private orderService: OrderService) {
+              private orderService: OrderService,
+              private title: Title) {
     this.userService.findById(this.tokenService.getId()).subscribe(data=>{
       this.user = data
+      this.formUpdate.patchValue(this.user);
+
     })
     this.orderService.purchaseHistories(this.tokenService.getId()).subscribe(data=>{
       this.orderList = data
     })
-
   }
 
   ngOnInit(): void {
     window.scrollTo(1900, 600)
-
+    this.title.setTitle('Thông tin cá nhân')
   }
+
 
   getProfile() {
     this.profile = true;
@@ -58,5 +77,9 @@ export class ProfileUserComponent implements OnInit {
     this.orderService.detailPurchase(code).subscribe(data=>{
       this.detailList = data;
     })
+  }
+
+  edit() {
+
   }
 }

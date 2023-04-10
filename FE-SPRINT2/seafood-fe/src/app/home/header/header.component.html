@@ -64,9 +64,8 @@
                 <a href="#" class="nav-link dropdown" data-toggle="dropdown">QUẢN LÝ</a>
                 <div class="dropdown-menu rounded-0 m-0"  style="background-color: #abdde5">
                   <a class="dropdown-item nav-link" [routerLink]="['/product/list']">Quản lý hàng hóa</a>
-                  <a href="#" class="dropdown-item nav-link">Quản lý báo cáo</a>
+                  <a href="#" class="dropdown-item nav-link" [routerLink]="['/salesReport/']">Quản lý báo cáo</a>
                   <a href="#" class="dropdown-item nav-link">Quản lý danh sách khách hàng</a>
-                  <a href="#" class="dropdown-item nav-link">Quản lý nhà cung cấp</a>
                 </div>
               </div>
             </div>
@@ -76,11 +75,7 @@
               <a class="btn rounded-pill nav-link p-2 border " [routerLink]="['/user/profile']"
                  id="dropdownMenuLink" >
                 <span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                       class="bi bi-person-circle text-primary" viewBox="0 0 16 16">
-                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                  </svg>
+                  <img src="{{image}}" style="width: 30px; height: 30px" alt="">
                  {{name}}
                 </span>
               </a>
@@ -93,7 +88,7 @@
               </a>
             </div>
             <div class="col-md-6 navbar-nav ml-auto py-0 justify-content-center" *ngIf="checkLogin">
-              <a class="btn rounded-pill nav-link p-2 border" (click)="logout()">
+              <a class="btn rounded-pill nav-link p-2 border " (click)="logout()">
                 <span>
                    ĐĂNG XUẤT
                 </span>
@@ -173,18 +168,18 @@
     <div class="col-lg-9">
       <div id="header-carousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-          <div class="carousel-item active" style="height: 500px;">
+          <div class="carousel-item active" style="height: 100%;">
             <img class="img-fluid"
-                 src="https://theme.hstatic.net/1000030244/1000943806/14/slide_3.jpg?v=4004" alt="Image">
+                 src="https://theme.hstatic.net/1000030244/1000943806/14/slide_3.jpg?v=4004" alt="Image" style="max-width: 100%">
           </div>
-          <div class="carousel-item" style="height: 500px;">
+          <div class="carousel-item" style="height: 100%;">
             <img class="img-fluid"
-                 src="https://theme.hstatic.net/1000030244/1000943806/14/slide_1.jpg?v=4004" alt="Image">
+                 src="https://theme.hstatic.net/1000030244/1000943806/14/slide_1.jpg?v=4004" alt="Image" style="max-width: 100%">
           </div>
 
-          <div class="carousel-item" style="height: 500px;">
+          <div class="carousel-item" style="height: 100%;">
             <img class="img-fluid"
-                 src="https://theme.hstatic.net/1000030244/1000943806/14/slide_5.jpg?v=4004" alt="Image">
+                 src="https://theme.hstatic.net/1000030244/1000943806/14/slide_5.jpg?v=4004" alt="Image" style="max-width: 100%">
           </div>
         </div>
         <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">

@@ -5,6 +5,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
 import {Router} from "@angular/router";
 import {MessageService} from "../../service/message.service";
+import {LenghtMessageService} from "../../service/lenght-message.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-login',
@@ -19,11 +21,13 @@ export class LoginComponent implements OnInit {
               private tokenService: TokenService,
               private formBuilder : FormBuilder,
               private router: Router,
-              private messageService: MessageService) { }
+              private messageService: MessageService,
+              private title: Title) { }
 
   ngOnInit(): void {
     window.scrollTo(1900,700)
     this.getFormLogin()
+    this.title.setTitle('Đăng nhập')
   }
 
   getFormLogin(): void {

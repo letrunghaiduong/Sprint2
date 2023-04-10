@@ -7,6 +7,8 @@ import {MessageService} from "../../service/message.service";
 import {CartService} from "../../service/cart.service";
 import {Router} from "@angular/router";
 import {LenghtMessageService} from "../../service/lenght-message.service";
+import {SellingProducts} from "../../model/selling-products";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-body',
@@ -19,15 +21,18 @@ export class BodyComponent implements OnInit {
   last: any;
   first: any;
   size = 4;
-
+  sellingProductList: SellingProducts[] = []
+  lastSelling: any;
+  firstSelling: any;
   constructor(private productService: ProductService,
               private messageService: MessageService,
               private tokenService: TokenService,
               private cartService: CartService,
               private router: Router,
-              private lenghtMessage: LenghtMessageService) {
+              private lenghtMessage: LenghtMessageService,
+              private title: Title) {
     this.getAll(0);
-
+    this.sellingProducts(0);
   }
 
   ngOnInit(): void {
@@ -39,7 +44,15 @@ export class BodyComponent implements OnInit {
       } else {
         window.scrollTo(0, 0)
       }
+    })
+    this.title.setTitle('Trang chủ')
+  }
 
+  sellingProducts(size: number){
+    this.productService.sellingProducts(size).subscribe(data=>{
+      this.sellingProductList = (data as any).content;
+      this.lastSelling = (data as any).last;
+      this.size = (data as any).size;
     })
   }
 
@@ -80,7 +93,7 @@ export class BodyComponent implements OnInit {
       if (error.error === 'errorLogin') {
         Swal.fire({
           position: 'center',
-          icon: 'error',
+          icon: 'warning',
           title: 'Bạn phải đăng nhập để tiếp tục!',
           showCancelButton: true,
           cancelButtonText: 'Hủy',

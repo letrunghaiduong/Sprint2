@@ -1,9 +1,6 @@
 package com.example.seafoodbe.controller;
 
-import com.example.seafoodbe.model.IProduct;
-import com.example.seafoodbe.model.Image;
-import com.example.seafoodbe.model.Product;
-import com.example.seafoodbe.model.Size;
+import com.example.seafoodbe.model.*;
 import com.example.seafoodbe.service.IProductService;
 import com.example.seafoodbe.service.ISizeService;
 import com.example.seafoodbe.service.impl.ProductService;
@@ -45,6 +42,17 @@ public class ProductController {
     }
 
 
+    @GetMapping("/sellingProducts")
+    private ResponseEntity<?> getAll(@PageableDefault(size = 4) Pageable pageable) {
+        Page<ISellingProducts> sellingProducts = productService.sellingProducts(pageable);
+        if (sellingProducts.isEmpty()){
+            return new ResponseEntity<>(new ArrayList<IProduct>(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(sellingProducts, HttpStatus.OK);
+    }
+
+
+
     @GetMapping("/findById")
     private ResponseEntity<?> findById(@RequestParam(defaultValue = "", required = false) Integer productId) {
         if (productId == null){
@@ -53,9 +61,6 @@ public class ProductController {
             Optional<Product> product = productService.findById(productId);
             return new ResponseEntity<>(product, HttpStatus.OK);
         }
-
-
-
     }
 
 
@@ -64,5 +69,16 @@ public class ProductController {
         productService.addProduct(product.getName(),product.getPrice(),product.getCategory().getId(),product.getOrigin().getId());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+
+    @GetMapping("/getAll")
+    private ResponseEntity<?> getAllProduct(@PageableDefault(size = 4) Pageable pageable) {
+        Page<Product> productList = productService.getAll(pageable);
+        if (productList.isEmpty()){
+            return new ResponseEntity<>(new ArrayList<IProduct>(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(productList, HttpStatus.OK);
+    }
+
 
 }

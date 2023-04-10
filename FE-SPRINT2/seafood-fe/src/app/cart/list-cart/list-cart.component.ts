@@ -13,6 +13,8 @@ import {Local} from "protractor/built/driverProviders";
 import {OrderService} from "../../service/order.service";
 import {Router} from "@angular/router";
 import {LenghtMessageService} from "../../service/lenght-message.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-list-cart',
@@ -26,22 +28,28 @@ export class ListCartComponent implements OnInit {
   checkPayment = false;
   user: User = {}
   quantity: any;
-
+  address: any
+  formAddress: FormGroup = new FormGroup({
+    address: new FormControl('',[Validators.required])
+  })
 
   constructor(private cartService: CartService,
               private tokenService: TokenService,
               private userService: UserService,
               private orderService: OrderService,
               private router: Router,
-              private lenghtMessage: LenghtMessageService) {
+              private lenghtMessage: LenghtMessageService,
+              private title: Title) {
     this.getAllCart(this.tokenService.getId())
     this.userService.findById(this.tokenService.getId()).subscribe(data => {
       this.user = data;
+      this.address = this.user.address
     })
   }
 
   ngOnInit(): void {
     window.scrollTo(1900, 700)
+    this.title.setTitle('Giỏ hàng ')
   }
 
   getAllCart(userId: any) {
@@ -77,7 +85,7 @@ export class ListCartComponent implements OnInit {
     const code ='MDH-' + number;
 
     for (let i = 0; i < this.carts.length; i++) {
-      this.orderService.order(this.user.address,
+      this.orderService.order(this.address,
         this.carts[i].size * this.carts[i].quantity * this.carts[i].price, this.carts[i].id,
         this.carts[i].productId, this.carts[i].size, this.carts[i].quantity, code).subscribe(data => {
       })
@@ -166,4 +174,11 @@ export class ListCartComponent implements OnInit {
     window.scrollTo(1900, 650)
 
   }
+
+
+
+  getAddress(value: string) {
+    this.address = value
+  }
+
 }

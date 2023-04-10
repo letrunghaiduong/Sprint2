@@ -1,61 +1,132 @@
-<a class="btn btn-outline-success" [routerLink]="['/product/create']">Thêm mới sản phẩm</a>
+<div class="row gutters-sm ml-5 mr-5">
+  <div class="col-sm-12 mb-3">
+    <div class="card h-100">
+      <div class="card-body">
+        <h2 class="text-center">Danh sách sản phẩm</h2>
+        <button class="btn btn-info" style="border-radius: 15px" [routerLink]="['/product/create']">Thêm mới sản phẩm</button>
+        <hr>
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Stt</th>
+            <th scope="col">Hình ảnh</th>
+            <th scope="col">Sản phẩm</th>
+            <th scope="col">Đơn giá</th>
+            <th scope="col">Loại sản phẩm</th>
+            <th scope="col">Xuất xứ</th>
+            <th scope="col">Hình ảnh</th>
+            <th scope="col">Chỉnh sửa</th>
+            <th scope="col">Xóa</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let product of productList, index as i">
+            <th scope="row">{{i+1 + (page * size)}}</th>
+            <td><img src="{{product.image}}" alt="" style="width: 40px; height: 40px"></td>
+            <td>{{product.name}}</td>
+            <td>{{product.price | currency:'VND':''}}/Kg</td>
+            <td>{{product.category?.categoryName}}</td>
+            <td>{{product.origin?.originName}}</td>
+            <td>
+              <button type="button" style="border-radius: 15px" class="btn btn-info" (click)="getImage(product.id)" data-toggle="modal" data-target="#exampleModalLong" >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 30px; height: 30px">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                </svg>
+              </button>
+            </td>
+            <td>
+              <button type="button" style="border-radius: 15px" class="btn btn-success" >
+                Chỉnh sửa
+              </button>
+            </td>
+            <td>
+              <button type="button" style="border-radius: 15px" class="btn btn-danger" >
+                Xóa
+              </button>
+            </td>
+          </tr>
 
-<table class="table table-success table-hover" style="margin-top: 50px">
-  <thead>
-  <tr>
-    <th>STT</th>
-    <th>Tên sản phẩm</th>
-    <th>Loại sản phẩm</th>
-    <th>Xuất xứ</th>
-    <th>Đơn giá(/kg)</th>
-    <th>Kích thước</th>
-    <th>Hình ảnh</th>
-    <th>Edit</th>
-    <th>Delete</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr >
-    <td>1</td>
-    <td>Cua</td>
-    <td>Đông lạnh</td>
-    <td>Mỹ</td>
-    <td>1500000</td>
-    <td>
-      <select class="badge-success">
-        <option value="1">1 kg</option>
-        <option value="2">2 kg</option>
-        <option value="3">3 kg</option>
-      </select>
-    </td>
-    <td></td>
-    <td>
-      <button class="btn btn-outline-success" routerLink="['/customer/edit',cus.id]" >Chỉnh sửa</button>
-    </td>
-    <td>
-      <a class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" click="temp = cus">
-        Xóa
-      </a>
-    </td>
-  </tr>
-  </tbody>
-</table>
-
-<!--modal delete-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-     data-bs-keyboard="false" data-bs-backdrop="static">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
+          </tbody>
+        </table>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<!--        Phân trang-->
+<div>
+  <div *ngIf="orderPage" class="d-flex justify-content-center" id="last-row">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item" [ngClass]="orderPage.first ? 'disabled': ''">
+          <a role="button" class="page-link" (click)="getAll(0)">Trang đầu</a>
+        </li>
+        <li class="page-item" [ngClass]="orderPage.first ? 'disabled': ''">
+          <a role="button" class="page-link" (click)="getAll(orderPage.number - 1)"><</a>
+        </li>
+        <li class="page-item" *ngIf="orderPage.number - 3 > 0">
+          <a role="button" class="page-link"
+             (click)="getAll(orderPage.number - 4)">{{orderPage.number - 3}}</a>
+        </li>
+        <li class="page-item" *ngIf="orderPage.number - 2 > 0">
+          <a role="button" class="page-link"
+             (click)="getAll(orderPage.number - 3)">{{orderPage.number - 2}}</a>
+        </li>
+        <li class="page-item" *ngIf="orderPage.number - 1 > 0">
+          <a role="button" class="page-link"
+             (click)="getAll(orderPage.number - 2)">{{orderPage.number - 1}}</a>
+        </li>
+        <li class="page-item" *ngIf="orderPage.number > 0">
+          <a role="button" class="page-link"
+             (click)="getAll(orderPage.number - 1)">{{orderPage.number}}</a>
+        </li>
+        <li class="page-item active"><a class="page-link">{{orderPage.number + 1}}</a></li>
+        <li class="page-item" *ngIf="orderPage.number + 2 <= orderPage.totalPages">
+          <a role="button" class="page-link"
+             (click)="getAll(orderPage.number + 1)">{{orderPage.number + 2}}</a>
+        </li>
+        <li class="page-item" *ngIf="orderPage.number + 3 <= orderPage.totalPages">
+          <a role="button" class="page-link"
+             (click)="getAll(orderPage.number + 2)">{{orderPage.number + 3}}</a>
+        </li>
+        <li class="page-item" *ngIf="orderPage.number + 4 <= orderPage.totalPages">
+          <a role="button" class="page-link"
+             (click)="getAll(orderPage.number + 3)">{{orderPage.number + 4}}</a>
+        </li>
+        <li class="page-item" *ngIf="orderPage.number + 5 <= orderPage.totalPages">
+          <a role="button" class="page-link"
+             (click)="getAll(orderPage.number + 4)">{{orderPage.number + 5}}</a>
+        </li>
+        <li class="page-item" [ngClass]="orderPage.last ? 'disabled': ''">
+          <a role="button" class="page-link"
+             (click)="getAll(orderPage.number + 1)">></a>
+        </li>
+        <li class="page-item" [ngClass]="orderPage.last ? 'disabled': ''">
+          <a role="button" class="page-link"
+             (click)="getAll(orderPage.totalPages - 1)">
+            Trang cuối
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+
+<!-- Modal detail-->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document" style="width: 1000px" >
+    <div class="modal-content">
       <div class="modal-body">
-        <p >Bạn có chắc muốn xóa thông tin của: </p>
+        <div class="row">
+          <div class="col-4" *ngFor="let image of imageList">
+            <img src="{{image.image}}" alt="" style="width: 200px; height: 200px">
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" data-bs-dismiss="modal" class="btn btn-primary" click="deleteCustomer()">
-          Delete
-        </button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" style="border-radius: 15px">Đóng</button>
       </div>
     </div>
   </div>

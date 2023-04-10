@@ -1,0 +1,56 @@
+<section class="vh-200 bg-image">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Thêm mới sản phẩm</h2>
+
+<!--              <button class="btn btn-info" style="border-radius: 15px" [routerLink]="['/product/list']">Quay lại danh sách</button>-->
+
+              <form [formGroup]="formCreate" (ngSubmit)="submit()">
+
+                <div class="form-outline mb-4">
+                  <label for="origin">Xuất xứ</label>
+                  <select id="origin" formControlName="origin" class="form-select form-control">
+                    <option *ngFor="let origin of originList" [ngValue]="origin" >{{origin.originName}}</option>
+                  </select>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label for="category">Loại sản phẩm</label>
+                  <select id="category" formControlName="category" class="form-select form-control">
+                    <option *ngFor="let category of categoryList" [ngValue]="category" >{{category.categoryName}}</option>
+                  </select>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label">Tên sản phẩm</label>
+
+                  <input type="text" class="form-control form-control-lg" formControlName="name"/>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label">Giá sản phẩm</label>
+                  <input type="text" class="form-control form-control-lg" formControlName="price"/>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label">Hình ảnh</label>
+                  <input type="file" class="form-control form-control-lg" formControlName="image"/>
+                </div>
+
+
+                  <button type="submit" class="btn btn-info" style="border-radius: 15px">
+                    Thêm mới
+                  </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
