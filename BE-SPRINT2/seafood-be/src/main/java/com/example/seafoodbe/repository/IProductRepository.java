@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -56,19 +57,17 @@ public interface IProductRepository extends JpaRepository<Product, Integer> {
     Optional<Product> findById(Integer id);
 
 
-    @Query(value = "SELECT product.id, product.name as name, SUM(od.quantity) AS totalQuantity,\n" +
-            "       product.image as image, product.price as price\n" +
+    @Query(value = "SELECT product.id,\n" +
+            "       product.name     as name,\n" +
+            "       SUM(od.quantity) AS totalQuantity,\n" +
+            "       product.image    as image,\n" +
+            "       product.price    as price\n" +
             "FROM product\n" +
             "         JOIN order_detail od on product.id = od.product_id\n" +
             "GROUP BY product.id, product.name\n" +
-            "order by totalQuantity desc",
-            nativeQuery = true,
-    countQuery = "SELECT product.id, product.name as name, SUM(od.quantity) AS totalQuantity,\n" +
-            "       product.image as image, product.price as price\n" +
-            "FROM product\n" +
-            "         JOIN order_detail od on product.id = od.product_id\n" +
-            "GROUP BY product.id, product.name\n" +
-            "order by totalQuantity desc")
-    Page<ISellingProducts> sellingProducts(Pageable pageable);
+            "order by totalQuantity desc\n" +
+            "limit 4",
+            nativeQuery = true)
+    List<ISellingProducts> sellingProducts();
 
 }

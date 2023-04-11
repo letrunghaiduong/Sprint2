@@ -43,8 +43,8 @@ public class ProductController {
 
 
     @GetMapping("/sellingProducts")
-    private ResponseEntity<?> getAll(@PageableDefault(size = 4) Pageable pageable) {
-        Page<ISellingProducts> sellingProducts = productService.sellingProducts(pageable);
+    private ResponseEntity<?> getAll() {
+        List<ISellingProducts> sellingProducts = productService.sellingProducts();
         if (sellingProducts.isEmpty()){
             return new ResponseEntity<>(new ArrayList<IProduct>(), HttpStatus.OK);
         }

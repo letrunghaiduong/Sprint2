@@ -147,3 +147,13 @@ img {
     transform: scale(1);
   }
 }
+.no-spinners::-webkit-outer-spin-button,
+.no-spinners::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-spinners {
+  -moz-appearance: textfield; /* Firefox */
+  appearance: textfield; /* Others */
+}

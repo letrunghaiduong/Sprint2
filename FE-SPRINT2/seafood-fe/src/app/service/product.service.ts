@@ -19,8 +19,8 @@ export class ProductService {
     return this.httpClient.get<Product>(this.API_PRODUCT+ '/findById?productId='+productId)
   }
 
-  sellingProducts(size: any): Observable<any[]>{
-    return  this.httpClient.get<any[]>(this.API_PRODUCT+'/sellingProducts?size='+size)
+  sellingProducts(): Observable<any[]>{
+    return  this.httpClient.get<any[]>(this.API_PRODUCT+'/sellingProducts')
   }
 
   showList(page: any): Observable<Product[]>{

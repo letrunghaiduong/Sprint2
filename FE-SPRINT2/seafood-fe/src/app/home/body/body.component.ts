@@ -22,8 +22,7 @@ export class BodyComponent implements OnInit {
   first: any;
   size = 4;
   sellingProductList: SellingProducts[] = []
-  lastSelling: any;
-  firstSelling: any;
+
   constructor(private productService: ProductService,
               private messageService: MessageService,
               private tokenService: TokenService,
@@ -32,7 +31,7 @@ export class BodyComponent implements OnInit {
               private lenghtMessage: LenghtMessageService,
               private title: Title) {
     this.getAll(0);
-    this.sellingProducts(0);
+    this.sellingProducts();
   }
 
   ngOnInit(): void {
@@ -48,11 +47,10 @@ export class BodyComponent implements OnInit {
     this.title.setTitle('Trang chủ')
   }
 
-  sellingProducts(size: number){
-    this.productService.sellingProducts(size).subscribe(data=>{
-      this.sellingProductList = (data as any).content;
-      this.lastSelling = (data as any).last;
-      this.size = (data as any).size;
+  sellingProducts(){
+    this.productService.sellingProducts().subscribe(data=>{
+      this.sellingProductList = data;
+
     })
   }
 
